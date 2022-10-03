@@ -1,5 +1,4 @@
 // linked list values
-
 const linkedListValues = (head) => {
   const values = [];
 
@@ -12,7 +11,6 @@ const linkedListValues = (head) => {
 };
 
 // sum list
-
 const sumList = (head) => {
   let sum = 0,
     current = head;
@@ -26,7 +24,6 @@ const sumList = (head) => {
 };
 
 // linked list find
-
 const linkedListFind = (head, target) => {
   let current = head;
 
@@ -39,7 +36,6 @@ const linkedListFind = (head, target) => {
 };
 
 // get node value
-
 const getNodeValue = (head, index) => {
   let current = head;
 
@@ -52,15 +48,14 @@ const getNodeValue = (head, index) => {
 };
 
 // reverse list
-
-// recursive
+    // recursive
 const reverseListRecursive = (head, prev = null) => {
   if (head === null) return prev;
   const next = head.next;
   head.next = prev;
   return reverseListRecursive(next, head);
 };
-// iterative
+    // iterative
 const reverseList = (head) => {
   let current = head,
     prev = null;
@@ -74,7 +69,6 @@ const reverseList = (head) => {
 };
 
 // zipper lists
-
 const zipperLists = (head1, head2) => {
   let head = head1,
     tail = head,
@@ -101,7 +95,6 @@ const zipperLists = (head1, head2) => {
 };
 
 // merge lists
-
 const mergeLists = (head1, head2) => {
   let returnHead = new Node(),
     tail = returnHead,
@@ -126,7 +119,6 @@ const mergeLists = (head1, head2) => {
 };
 
 // is univalue list
-
 const isUnivalueList = (head) => {
   const valSet = new Set();
   let current = head;
@@ -140,7 +132,6 @@ const isUnivalueList = (head) => {
 };
 
 // longest streak
-
 const longestStreak = (head) => {
   let current = head,
     maxStreak = 0,
@@ -162,7 +153,6 @@ const longestStreak = (head) => {
 };
 
 // remove node
-
 const removeNode = (head, targetVal) => {
   if (head.val === targetVal) return head.next;
   let current = head,
@@ -180,7 +170,6 @@ const removeNode = (head, targetVal) => {
 };
 
 // insert node
-
 const insertNode = (head, value, index) => {
   let insertNode = new Node(value),
     current = head,
