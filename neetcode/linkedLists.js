@@ -29,7 +29,7 @@ var reorderList = function (head) {
   reorder(head, reverseListFromMid);
 };
 
-  // Helpers
+// Helpers
 const getMid = (head) => {
   let [slow, fast] = [head, head];
 
@@ -69,3 +69,66 @@ const reorder = (list1, list2) => {
   }
 };
 
+// Remove Nth node from the end of linked list
+// O(n) time O(n) space by generating a new linked list
+var removeNthFromEnd = function (head, n) {
+  const sentinel = new ListNode();
+
+  sentinel.next = head;
+
+  const fast = moveFast(sentinel, n);
+  const slow = moveSlow(sentinel, fast);
+
+  slow.next = slow.next.next || null;
+
+  return sentinel.next;
+};
+
+const moveFast = (fast, n) => {
+  for (let i = 1; i <= n + 1; i++) {
+    fast = fast.next;
+  }
+
+  return fast;
+};
+
+const moveSlow = (slow, fast) => {
+  while (fast) {
+    slow = slow.next;
+    fast = fast.next;
+  }
+
+  return slow;
+};
+
+// O(n) time O(1) space by resetting pointer in place solution
+var removeNthFromEnd = function (head, n) {
+  const length = getNthFromEnd(head, n);
+
+  const isHead = length < 0;
+  if (isHead) return head.next;
+
+  const curr = moveNode(head, length);
+
+  curr.next = curr.next.next;
+
+  return head;
+};
+
+const getNthFromEnd = (curr, n, length = 0) => {
+  while (curr) {
+    curr = curr.next;
+    length++;
+  }
+
+  return length - n - 1;
+};
+
+const moveNode = (curr, length) => {
+  while (length) {
+    curr = curr.next;
+    length--;
+  }
+
+  return curr;
+};
