@@ -132,3 +132,16 @@ const moveNode = (curr, length) => {
 
   return curr;
 };
+
+// Linked list cycle O(n) time O(1) space in place;
+var hasCycle = function (head) {
+  let [slow, fast] = [head, head];
+
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow === fast) return true;
+  }
+
+  return false;
+};
