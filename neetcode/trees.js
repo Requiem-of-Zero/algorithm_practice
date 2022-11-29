@@ -20,3 +20,11 @@ var maxDepth = function (root) {
   let right = maxDepth(root.right);
   return 1 + Math.max(left, right);
 };
+
+// Same Tree LeetCode #100
+  // O(n) time O(1) space *recursive*
+var isSameTree = function (p, q) {
+  if (!p && !q) return true;
+  if (!p || !q || p.val !== q.val) return false;
+  return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+};
