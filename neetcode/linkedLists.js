@@ -1,5 +1,4 @@
 // Recursive reverse list
-
 var reverseList = function (head, prev = null) {
   if (!head) return prev;
   let next = head.next;
@@ -8,7 +7,6 @@ var reverseList = function (head, prev = null) {
 };
 
 // Iterative reverse list
-
 var reverseList = function (head, prev = null) {
   let curr = head;
   while (curr) {
@@ -21,7 +19,6 @@ var reverseList = function (head, prev = null) {
 };
 
 // Reorder List 1 -> 2 -> 3 -> 4 to 1 -> 4 -> 2 -> 3
-
 var reorderList = function (head) {
   const mid = getMid(head);
   const reverseListFromMid = reverseList(mid);
@@ -70,7 +67,7 @@ const reorder = (list1, list2) => {
 };
 
 // Remove Nth node from the end of linked list
-// O(n) time O(n) space by generating a new linked list
+  // O(n) time O(n) space by generating a new linked list
 var removeNthFromEnd = function (head, n) {
   const sentinel = new ListNode();
 
