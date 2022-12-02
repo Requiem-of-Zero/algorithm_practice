@@ -64,3 +64,78 @@ var lowestCommonAncestor = function (root, p, q) {
     }
   }
 };
+// Level Order Traversal
+  // O(n) time for amount of nodes in tree O(k) space for the amount of node in the levels of the tree
+var levelOrder = function (root) {
+  if (!root) return [];
+  return bfs([root]);
+};
+
+const bfs = (queue, levels = []) => {
+  while (queue.length) {
+    const level = [];
+    for (let i = queue.length - 1; 0 <= i; i--) {
+      const currNode = queue.shift();
+      if (currNode.left) queue.push(currNode.left);
+      if (currNode.right) queue.push(currNode.right);
+      level.push(currNode.val);
+    }
+    levels.push(level.slice());
+  }
+  return levels;
+};
+
+// Validate Binary Search Tree
+var isValidBST = function (root) {
+  if (!root) return true;
+  let leftValid = isValidBST(root.left),
+    rightValid = isValidBST(root.right);
+  //     from root move left keep going right until the end
+  //      -variable: firstPoint : boolean
+  //         the val has to be less than the root val
+  let firstPoint = validateFirst(root.left, root.val);
+  //
+  //     from root move right keep going left until the end
+  //      -variable: secondPoint : boolean
+  //         the val has to be greater than the root val
+  let secondPoint = validateSecond(root.right, root.val);
+  return leftValid && rightValid && firstPoint && secondPoint;
+};
+
+const validateFirst = (leftNode, currVal) => {
+  if (!leftNode) return true;
+
+  while (leftNode.right) {
+    leftNode = leftNode.right;
+  }
+
+  return leftNode.val < currVal;
+};
+
+const validateSecond = (rightNode, currVal) => {
+  if (!rightNode) return true;
+
+  while (rightNode.left) {
+    rightNode = rightNode.left;
+  }
+
+  return rightNode.val > currVal;
+};
+
+// Neetcode solution
+var isValidBST = function (root, min = -Infinity, max = Infinity) {
+  const isBaseCase = root === null;
+  if (isBaseCase) return true;
+
+  const isInvalid = root.val <= min || max <= root.val;
+  if (isInvalid) return false;
+
+  return dfs(root, min, max);
+};
+
+const dfs = (root, min, max) => {
+  const left = isValidBST(root.left, min, root.val);
+  const right = isValidBST(root.right, root.val, max);
+
+  return left && right;
+};
