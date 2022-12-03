@@ -64,6 +64,7 @@ var lowestCommonAncestor = function (root, p, q) {
     }
   }
 };
+
 // Level Order Traversal
   // O(n) time for amount of nodes in tree O(k) space for the amount of node in the levels of the tree
 var levelOrder = function (root) {
@@ -129,13 +130,28 @@ var isValidBST = function (root, min = -Infinity, max = Infinity) {
 
   const isInvalid = root.val <= min || max <= root.val;
   if (isInvalid) return false;
-
+  
+  const dfs = (root, min, max) => {
+    const left = isValidBST(root.left, min, root.val);
+    const right = isValidBST(root.right, root.val, max);
+  
+    return left && right;
+  };
+  
   return dfs(root, min, max);
 };
 
-const dfs = (root, min, max) => {
-  const left = isValidBST(root.left, min, root.val);
-  const right = isValidBST(root.right, root.val, max);
 
-  return left && right;
+// Kth Smallest Element in a BST
+  // O(n) time O(n) space 
+var kthSmallest = function (root, k, inOrder = []) {
+  if (!root) return inOrder;
+  return dfs(root, k, inOrder);
+};
+
+const dfs = (root, k, inOrder) => {
+  if (root.left) kthSmallest(root.left, k, inOrder);
+  inOrder.push(root.val);
+  if (root.right) kthSmallest(root.right, k, inOrder);
+  return inOrder[k - 1];
 };
