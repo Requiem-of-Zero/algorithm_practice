@@ -1,10 +1,12 @@
-// Climb Stairs #70
+/*
+ * Climb Stairs #70
+ */
 var climbStairs = function (n) {
-    // if there are less than 3 stairs, we can return the stair amount which is the same as the amount of ways
+  // if there are less than 3 stairs, we can return the stair amount which is the same as the amount of ways
   if (n < 4) {
     return n;
   }
-    //   
+  //
   var firstSum = 2;
   var secondSum = 3;
 
@@ -15,7 +17,9 @@ var climbStairs = function (n) {
   return firstSum + secondSum;
 };
 
-// Intersection of Two Linked Lists #160
+/*
+ * Intersection of Two Linked Lists #160
+ */
 var getIntersectionNode = function (headA, headB) {
   if (headA === null && headB === null) return null;
 
@@ -37,10 +41,12 @@ var getIntersectionNode = function (headA, headB) {
   }
 
   return a_pointer;
-}; 
+};
 
-// Longest Common Prefix 
-  // O(n^2) time O(n) space
+/*
+ * Longest Common Prefix #14
+    O(n^2) time O(n) space 
+*/
 const longestCommonPrefix = (strs) => {
   if (strs.length === 0) return "";
 
@@ -71,3 +77,16 @@ const longestCommonPrefix = (strs) => {
 //   return prefix;
 // };
 
+/*
+ *Remove Element in place #27
+ */
+var removeElement = function (nums, val) {
+  for (let i = 0; i < nums.length; i++) {
+    if (i > nums.length - 1) break;
+    if (nums[i] === val) {
+      nums.splice(i, 1);
+      i--;
+    }
+  }
+  return nums.length;
+};
