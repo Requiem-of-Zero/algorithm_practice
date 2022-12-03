@@ -39,3 +39,35 @@ var getIntersectionNode = function (headA, headB) {
   return a_pointer;
 }; 
 
+// Longest Common Prefix 
+  // O(n^2) time O(n) space
+const longestCommonPrefix = (strs) => {
+  if (strs.length === 0) return "";
+
+  let prefix = strs[0];
+
+  for (let i = 1; i < strs.length; i++) {
+    while (strs[i].indexOf(prefix) !== 0) {
+      prefix = prefix.substring(0, prefix.length - 1);
+      console.log(prefix);
+    }
+  }
+  return prefix;
+};
+
+// Cooler solution from leetcode
+// const longestCommonPrefix = (strs) => {
+//   if (!strs.length) return "";
+
+//   let prefix = strs[0];
+
+//   for (let i = strs.length; --i; ) {
+//     for (; strs[i].indexOf(prefix) !== 0; ) {
+//       prefix = prefix.substring(0, prefix.length - 1);
+//       if (!prefix.length) return "";
+//     }
+//   }
+
+//   return prefix;
+// };
+
