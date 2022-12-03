@@ -1,5 +1,5 @@
 /*
- * Climb Stairs #70
+ * #70 Climb Stairs
  */
 var climbStairs = function (n) {
   // if there are less than 3 stairs, we can return the stair amount which is the same as the amount of ways
@@ -18,7 +18,7 @@ var climbStairs = function (n) {
 };
 
 /*
- * Intersection of Two Linked Lists #160
+ * #160 Intersection of Two Linked Lists
  */
 var getIntersectionNode = function (headA, headB) {
   if (headA === null && headB === null) return null;
@@ -44,7 +44,7 @@ var getIntersectionNode = function (headA, headB) {
 };
 
 /*
- * Longest Common Prefix #14
+ * #14 Longest Common Prefix
     O(n^2) time O(n) space 
 */
 const longestCommonPrefix = (strs) => {
@@ -78,7 +78,7 @@ const longestCommonPrefix = (strs) => {
 // };
 
 /*
- *Remove Element in place #27
+ * #27 Remove Element in place
  */
 var removeElement = function (nums, val) {
   for (let i = 0; i < nums.length; i++) {
@@ -89,4 +89,20 @@ var removeElement = function (nums, val) {
     }
   }
   return nums.length;
+};
+
+/*
+* #58 Length of Last Word
+*/ 
+var lengthOfLastWord = function (s) {
+  let splitStr = s.split(" ");
+  for (let i = splitStr.length - 1; 0 <= i; i--) {
+    let word = splitStr[i];
+    if (isWord(word)) return word.length;
+  }
+};
+
+const isWord = (word) => {
+  if (typeof word === "string" && word) return true;
+  return false;
 };
