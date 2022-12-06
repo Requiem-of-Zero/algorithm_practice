@@ -78,8 +78,6 @@ const longestCommonPrefix = (strs) => {
 // };
 
 /*
-
-
  * #27 Remove Element in place
  */
 var removeElement = function (nums, val) {
