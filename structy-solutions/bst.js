@@ -1,12 +1,12 @@
-// depth first values
-    // recursive
+// * Depth First Values
+// ! recursive
 const depthFirstValuesRecursive = (root) => {
   if (!root) return [];
   let leftValues = depthFirstValues(root.left);
   let rightValues = depthFirstValues(root.right);
   return [root.val, ...leftValues, ...rightValues];
 };
-    // iterative
+    // ! iterative
 const depthFirstValues = (root) => {
   if (!root) return [];
   const values = [],
@@ -21,7 +21,7 @@ const depthFirstValues = (root) => {
   return values;
 };
 
-// breadth first values
+// * Breadth First Values
 const breadthFirstValues = (root) => {
   if (!root) return [];
 
@@ -38,4 +38,62 @@ const breadthFirstValues = (root) => {
   }
 
   return result;
+};
+
+// * Tree Sum
+const treeSum = (root) => {
+  // todo
+  if (!root) return 0;
+
+  const stack = [root];
+  let result = 0;
+
+  while (stack.length) {
+    let currNode = stack.pop();
+
+    result += currNode.val;
+
+    if (currNode.right) stack.push(currNode.right);
+    if (currNode.left) stack.push(currNode.left);
+  }
+
+  return result;
+};
+
+// * Tree Includes
+const treeIncludes = (root, target) => {
+  // todo
+  if (!root) return false;
+
+  const stack = [root];
+
+  while (stack.length) {
+    let curr = stack.pop();
+
+    if (curr.val === target) return true;
+
+    if (curr.left) stack.push(curr.left);
+    if (curr.right) stack.push(curr.right);
+  }
+
+  return false;
+};
+
+// * Tree Min Value
+const treeMinValue = (root) => {
+  // todo
+  const stack = [root];
+
+  let min = Infinity;
+
+  while (stack.length) {
+    let curr = stack.pop();
+
+    min = Math.min(curr.val, min);
+
+    if (curr.left) stack.push(curr.left);
+    if (curr.right) stack.push(curr.right);
+  }
+
+  return min;
 };
