@@ -97,3 +97,22 @@ const treeMinValue = (root) => {
 
   return min;
 };
+
+// * Tree Path Finder
+  // Time O(n^2) space O(n)
+const pathFinder = (root, target) => {
+  if(!root) return null
+  if(root.val === target) return [target];
+  if(!root.left && !root.right) return null;
+  const left = pathFinder(root.left, target),
+        right = pathFinder(root.right, target);
+  if(left !== null){
+    left.unshift(root.val);
+    return left
+  }
+  if(right !== null){
+    right.unshift(root.val);
+    return right;
+  }
+  return null
+};
