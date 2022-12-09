@@ -118,12 +118,11 @@ var getTargetCopy = function (original, cloned, target) {
 
 // * #637 Average of Levels in Binary Tree
 var averageOfLevels = function (root) {
-  let queue = [root];
-  let average = [];
+  let [queue, average] = [[root], []];
 
   while (queue.length) {
-    let length = queue.length;
-    let sum = 0;
+    let [length, sum] = [queue.length, 0];
+
     for (let i = 0; i < length; i++) {
       let currNode = queue.pop();
       sum += currNode.val;
