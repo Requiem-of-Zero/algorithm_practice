@@ -106,3 +106,12 @@ const isWord = (word) => {
   if (typeof word === "string" && word) return true;
   return false;
 };
+
+// * #1379 Find a Corresponding Node of a Binary Tree in a Clone of That Tree
+var getTargetCopy = function (original, cloned, target) {
+  if (!original) return null;
+  if (original === target) return cloned;
+  let left = getTargetCopy(original.left, cloned.left, target);
+  let right = getTargetCopy(original.right, cloned.right, target);
+  return left || right;
+};
