@@ -211,3 +211,27 @@ var increasingBST = function (root) {
 
   return rootNode;
 };
+// ! with recursive inOrder traversal
+// Time O(n) Space O(n)
+var increasingBST = function (root) {
+  let result = [];
+
+  function inOrder(node) {
+    if (!node) return;
+    inOrder(node.left);
+    result.push(node.val);
+    inOrder(node.right);
+  }
+
+  inOrder(root);
+
+  let dummyNode = new TreeNode(0);
+  let returnNode = dummyNode;
+
+  for (let i = 0; i < result.length; i++) {
+    dummyNode.right = new TreeNode(result[i]);
+    dummyNode = dummyNode.right;
+  }
+
+  return returnNode.right;
+};
