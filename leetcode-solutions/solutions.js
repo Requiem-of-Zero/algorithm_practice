@@ -179,3 +179,35 @@ var preorder = function (root) {
 
   return res;
 };
+
+// * #897 Increasing Order Search Tree
+// Time O(n logn) Space O(n)
+var increasingBST = function (root) {
+  const getNodeValues = (root) => {
+    let [stack, res] = [[root], []];
+
+    while (stack.length) {
+      let currNode = stack.pop();
+
+      if (currNode.left) stack.push(currNode.left);
+      if (currNode.right) stack.push(currNode.right);
+
+      res.push(currNode.val);
+    }
+
+    return res;
+  };
+
+  let sortedNodeValues = getNodeValues(root).sort((a, b) => a - b);
+  let rootNode = new TreeNode(sortedNodeValues.shift());
+  let curr = rootNode;
+
+  while (sortedNodeValues.length) {
+    let nextHigherVal = sortedNodeValues.shift();
+
+    curr.right = new TreeNode(nextHigherVal);
+    curr = curr.right;
+  }
+
+  return rootNode;
+};
