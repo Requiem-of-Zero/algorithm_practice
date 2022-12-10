@@ -139,3 +139,22 @@ var averageOfLevels = function (root) {
 
   return average;
 };
+
+// * N-ary Post Order Traversal Iterative
+// Time O(n) Space O(n)
+var postorder = function (root) {
+  if (!root) return [];
+  let [stack, res] = [[root], []];
+
+  while (stack.length) {
+    let curr = stack.pop();
+
+    for (const child of curr.children) {
+      stack.push(child);
+    }
+
+    res.push(curr.val);
+  }
+
+  return res.reverse();
+};
