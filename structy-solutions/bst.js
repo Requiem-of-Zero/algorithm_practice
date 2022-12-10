@@ -116,3 +116,33 @@ const pathFinder = (root, target) => {
   }
   return null
 };
+
+// * Tree Value Count Iterative
+// Time O(n) Space O(n)
+const treeValueCount = (root, target) => {
+  // todo
+  if (!root) return 0;
+  let [count, stack] = [0, [root]];
+
+  while (stack.length) {
+    let currNode = stack.pop();
+    if (currNode.val === target) count++;
+    if (currNode.left) stack.push(currNode.left);
+    if (currNode.right) stack.push(currNode.right);
+  }
+
+  return count;
+};
+
+/*
+ ! Recursive
+const treeValueCount = (root, target) => {
+  if (root === null) return 0;
+  const match = root.val === target ? 1 : 0;
+  return (
+    match +
+    treeValueCount(root.left, target) +
+    treeValueCount(root.right, target)
+  );
+};
+*/ 
