@@ -140,7 +140,7 @@ var averageOfLevels = function (root) {
   return average;
 };
 
-// * N-ary Post Order Traversal Iterative
+// * #590 N-ary Post Order Traversal Iterative
 // Time O(n) Space O(n)
 var postorder = function (root) {
   if (!root) return [];
@@ -157,4 +157,25 @@ var postorder = function (root) {
   }
 
   return res.reverse();
+};
+
+
+// * #589 N-ary Pre Order Traversal Iterative
+// Time O(n) Space O(n)
+var preorder = function (root) {
+  if (!root) return [];
+  let [stack, res] = [[root], []];
+
+  while (stack.length) {
+    let currNode = stack.pop();
+
+    for (let i = currNode.children.length - 1; 0 <= i; i--) {
+      let currChild = currNode.children[i];
+      stack.push(currChild);
+    }
+
+    res.push(currNode.val);
+  }
+
+  return res;
 };
