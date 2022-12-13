@@ -234,6 +234,28 @@ const insertNode = (head, value, index) => {
   return head;
 };
 
+// ! New and improved insert node algorithm
+// const insertNode = (head, value, index) => {
+//   // todo
+//   let curr = head,
+//     insert = new Node(value);
+//   if (index === 0) {
+//     insert.next = head;
+//     return insert;
+//   }
+
+//   for (let i = 0; i < index - 1; i++) {
+//     curr = curr.next;
+//   }
+
+//   let rest = curr.next;
+//   curr.next = insert;
+//   curr = curr.next;
+//   curr.next = rest;
+
+//   return head;
+// };
+
 // add lists
     // recursive
 const addListsRecursive = (head1, head2, carry = 0) => {
