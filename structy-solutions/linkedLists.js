@@ -152,6 +152,30 @@ const longestStreak = (head) => {
   return maxStreak;
 };
 
+// ! New and improved longest streak
+
+// const longestStreak = (head) => {
+//   if (!head) return 0;
+//   let [maxStreak, curr, currStreak] = [0, head, 1];
+
+//   while (curr && curr.next) {
+//     let next = curr.next;
+
+//     if (curr.val === next.val) {
+//       currStreak++;
+//     } else {
+//       maxStreak = Math.max(maxStreak, currStreak);
+//       currStreak = 1;
+//     }
+
+//     curr = curr.next;
+//   }
+
+//   maxStreak = Math.max(maxStreak, currStreak);
+
+//   return maxStreak;
+// };
+
 // remove node
 const removeNode = (head, targetVal) => {
   if (head.val === targetVal) return head.next;
