@@ -193,6 +193,24 @@ const removeNode = (head, targetVal) => {
   return head;
 };
 
+// ! No imposter syndrome remove node
+// const removeNode = (head, targetVal) => {
+//   if(head.val === targetVal) return head.next
+//   let curr = head;
+
+//   while(curr){
+//     let next = curr.next
+//     if(next.val === targetVal){
+//       curr.next = curr.next.next
+//       break
+//     }
+
+//      curr =  curr.next;
+//   }
+//   return head;
+// };
+ 
+
 // insert node
 const insertNode = (head, value, index) => {
   let insertNode = new Node(value),
