@@ -79,6 +79,16 @@ const treeIncludes = (root, target) => {
   return false;
 };
 
+// ! Recursive tree includes
+// const treeIncludes = (root, target) => {
+
+//   if (!root) return false;
+//   if (root.val === target) return true;
+//   let left = treeIncludes(root.left, target),
+//     right = treeIncludes(root.right, target);
+//   return left || right;
+// };
+
 // * Tree Min Value
 const treeMinValue = (root) => {
   // todo

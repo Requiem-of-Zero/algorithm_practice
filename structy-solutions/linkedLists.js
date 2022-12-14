@@ -209,7 +209,7 @@ const removeNode = (head, targetVal) => {
 //   }
 //   return head;
 // };
- 
+
 
 // insert node
 const insertNode = (head, value, index) => {
