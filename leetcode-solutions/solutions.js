@@ -236,7 +236,7 @@ var increasingBST = function (root) {
   return returnNode.right;
 };
 
-// * Minimum difference in BST
+// * #783 Minimum difference in BST
 // Time O(n^2)
 var minDiffInBST = function (root) {
   let stack = [root],
@@ -260,4 +260,26 @@ var minDiffInBST = function (root) {
   }
 
   return min;
+};
+
+// * #1302 Deepest Leaves Sum
+var deepestLeavesSum = function (root) {
+  let queue = [root],
+    length = 1,
+    sum = 0,
+    prev = 0;
+
+  while (queue.length) {
+    length = queue.length;
+    for (let i = 0; i < length; i++) {
+      let currNode = queue.pop();
+      sum += currNode.val;
+      if (currNode.left) queue.unshift(currNode.left);
+      if (currNode.right) queue.unshift(currNode.right);
+    }
+    prev = sum;
+    sum = 0;
+  }
+
+  return prev;
 };
