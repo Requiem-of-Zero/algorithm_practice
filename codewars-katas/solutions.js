@@ -40,3 +40,23 @@ function isFloat(n) {
   return Number(n) === n && n % 1 !== 0;
 }
 
+
+// * Is Tree Perfect
+function isPerfect(root) {
+  if (!root) return true;
+  let [queue, length, count] = [[root], 1, 1];
+
+  while (queue.length) {
+    length = queue.length;
+    if (queue.length !== count) return false;
+    for (let i = 0; i < length; i++) {
+      let currNode = queue.pop();
+      if (currNode.left) queue.unshift(currNode.left);
+      if (currNode.right) queue.unshift(currNode.right);
+    }
+
+    count *= 2;
+  }
+
+  return true;
+}
