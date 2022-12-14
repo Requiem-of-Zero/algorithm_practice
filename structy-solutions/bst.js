@@ -89,6 +89,15 @@ const treeIncludes = (root, target) => {
 //   return left || right;
 // };
 
+// * Max Path Sum
+const maxPathSum = (root) => {
+  if (!root) return -Infinity;
+  if (root.left === null && root.right === null) return root.val;
+  let left = maxPathSum(root.left),
+    right = maxPathSum(root.right);
+  return root.val + Math.max(left, right);
+};
+
 // * Tree Min Value
 const treeMinValue = (root) => {
   // todo
