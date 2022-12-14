@@ -235,3 +235,29 @@ var increasingBST = function (root) {
 
   return returnNode.right;
 };
+
+// * Minimum difference in BST
+// Time O(n^2)
+var minDiffInBST = function (root) {
+  let stack = [root],
+    min = Infinity,
+    treeValues = [];
+
+  while (stack.length) {
+    let curr = stack.pop();
+    treeValues.push(curr.val);
+    if (curr.right) stack.push(curr.right);
+    if (curr.left) stack.push(curr.left);
+  }
+
+  for (let i = 0; i < treeValues.length; i++) {
+    let firstVal = treeValues[i];
+    for (let j = i + 1; j < treeValues.length; j++) {
+      let secondVal = treeValues[j];
+      let diff = -firstVal + secondVal;
+      min = Math.min(Math.abs(diff), min);
+    }
+  }
+
+  return min;
+};
