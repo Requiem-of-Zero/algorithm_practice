@@ -217,3 +217,47 @@ const allTreePaths = (root) => {
 
   return paths;
 };
+
+// * Tree Levels
+// Time O(n) Space O(n)
+const treeLevels = (root) => {
+  // todo
+  if (!root) return [];
+  let [queue, levels, length] = [[root], [], 1];
+
+  while (queue.length) {
+    let level = [];
+    length = queue.length;
+    for (let i = 0; i < length; i++) {
+      let currNode = queue.pop();
+      level.push(currNode.val);
+      if (currNode.left) queue.unshift(currNode.left);
+      if (currNode.right) queue.unshift(currNode.right);
+    }
+    levels.push(level);
+  }
+
+  return levels;
+};
+
+// * Level Averages BFS
+// Time O(n) Space O(n) 
+const levelAverages = (root) => {
+  // todo
+  if (!root) return [];
+  let [queue, sum, averages, length] = [[root], 0, [], 1];
+
+  while (queue.length) {
+    length = queue.length;
+    for (let i = 0; i < length; i++) {
+      let currNode = queue.pop();
+      sum += currNode.val;
+      if (currNode.left) queue.unshift(currNode.left);
+      if (currNode.right) queue.unshift(currNode.right);
+    }
+    averages.push(sum / length);
+    sum = 0;
+  }
+
+  return averages;
+};
