@@ -76,3 +76,27 @@ const createAdj = (edges) => {
 
   return graph;
 };
+
+// * Count How Many Connected Components There Are
+// Time O(n) Space O(n)
+const connectedComponentsCount = (graph) => {
+  // todo
+  const visited = new Set();
+  let count = 0;
+  for (let node in graph) {
+    if (explore(graph, node, visited) === true) {
+      count++;
+    }
+  }
+  return count;
+};
+// ! Recursive DFS
+const explore = (graph, curr, visited) => {
+  if (visited.has(curr.toString())) return false;
+  visited.add(curr.toString());
+
+  for (const node of graph[curr]) {
+    explore(graph, node, visited);
+  }
+  return true;
+};
