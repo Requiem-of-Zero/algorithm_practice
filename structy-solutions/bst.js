@@ -166,6 +166,34 @@ const treeValueCount = (root, target) => {
 };
 */ 
 
+// * How High
+// ! Recursive
+// Time O(n) Space O(n)
+const howHigh = (node) => {
+  // todo
+  if (!node) return -1;
+  const left = howHigh(node.left),
+    right = howHigh(node.right);
+  return 1 + Math.max(left, right);
+};
+
+// * Bottom Right Value
+// Time O(n) Space O(n)
+const bottomRightValue = (root) => {
+  // todo
+  const queue = [root];
+  let lastEle;
+
+  while (queue.length) {
+    let curr = queue.shift();
+    lastEle = curr.val;
+    if (curr.left) queue.push(curr.left);
+    if (curr.right) queue.push(curr.right);
+  }
+
+  return lastEle;
+};
+
 // * All Tree Paths in 2D Matrix
 // ! Recursive
 // Time O(n) Space O(n)
