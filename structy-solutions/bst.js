@@ -294,3 +294,15 @@ const levelAverages = (root) => {
 //   }
 //   return sum / array.length;
 // };
+
+// * Leafs list
+// ! Recursive Leafs List Solution
+// Time O(n) Space O(n)
+const leafList = (root) => {
+  // todo
+  if (!root) return [];
+  if (!root.left && !root.right) return [root.val];
+  let left = leafList(root.left),
+    right = leafList(root.right);
+  return left.concat(right);
+};
