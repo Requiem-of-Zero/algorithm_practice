@@ -100,3 +100,31 @@ const explore = (graph, curr, visited) => {
   }
   return true;
 };
+
+// * Largest Component in a Graph
+// Time O(n) Space O(n)
+const largestComponent = (graph) => {
+  // todo
+  let largest = 0;
+
+  for (let node in graph) {
+    let size = explore(graph, node, new Set());
+    largest = Math.max(size, largest);
+  }
+
+  return largest;
+};
+
+const explore = (graph, curr, visited) => {
+  if (visited.has(curr)) return 0;
+
+  visited.add(curr);
+
+  let size = 1;
+
+  for (const neighbors of graph[curr]) {
+    size += explore(graph, neighbors, visited);
+  }
+
+  return size;
+};
