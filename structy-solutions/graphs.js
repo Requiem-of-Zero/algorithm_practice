@@ -128,3 +128,24 @@ const explore = (graph, curr, visited) => {
 
   return size;
 };
+
+const shortestPath = (edges, nodeA, nodeB) => {
+  let graph = createAdj(edges),
+    visited = new Set([nodeA, 0]),
+    queue = [[nodeA, 0]];
+
+  while (queue.length) {
+    let [curr, distance] = queue.shift();
+
+    if (curr === nodeB) return distance;
+
+    for (let neighbor of graph[curr]) {
+      if (!visited.has(neighbor)) {
+        visited.add(neighbor);
+        queue.push([neighbor, distance + 1]); //ask why distance++ doesnt work
+      }
+    }
+  }
+
+  return -1;
+};
