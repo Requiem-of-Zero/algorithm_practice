@@ -165,3 +165,27 @@ const treeValueCount = (root, target) => {
   );
 };
 */ 
+
+// * All Tree Paths in 2D Matrix
+// ! Recursive
+// Time O(n) Space O(n)
+const allTreePaths = (root) => {
+  // todo
+  if (!root) return [];
+  if (!root.left && !root.right) return [[root.val]];
+
+  const paths = [];
+
+  const left = allTreePaths(root.left),
+    right = allTreePaths(root.right);
+
+  for (let subPath of left) {
+    paths.push([root.val, ...subPath]);
+  }
+
+  for (let subPath of right) {
+    paths.push([root.val, ...subPath]);
+  }
+
+  return paths;
+};
