@@ -193,3 +193,44 @@ const minimumIsland = (grid) => {
   }
   return minimum;
 };
+
+// * Closest Carrot BFS
+// Time O(n) Space O(n)
+const closestCarrot = (grid, startRow, startCol) => {
+  // todo
+  const [queue, visited] = [[[startRow, startCol, 0]], new Set()];
+
+  while (queue.length) {
+    let [currRow, currCol, distance] = queue.pop();
+
+    if (grid[currRow][currCol] === "C") return distance;
+
+    let moves = [
+      [0, 1],
+      [0, -1],
+      [1, 0],
+      [-1, 0],
+    ];
+
+    for (const move of moves) {
+      let [dirX, dirY] = move;
+      let rowChange = currRow + dirX,
+        colChange = currCol + dirY;
+
+      let pos = rowChange + "," + colChange;
+
+      const rowInBounds = 0 <= rowChange && rowChange < grid.length;
+      const colInBounds = 0 <= colChange && colChange < grid[0].length;
+      if (
+        rowInBounds &&
+        colInBounds &&
+        !visited.has(pos) &&
+        grid[rowChange][colChange] !== "X"
+      ) {
+        visited.add(pos);
+        queue.unshift([rowChange, colChange, distance + 1]);
+      }
+    }
+  }
+  return -1;
+};
