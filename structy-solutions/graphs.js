@@ -45,3 +45,34 @@ const hasPath = (graph, src, dst) => {
 //   return false;
 // };
 
+// * Undirected Path
+// Time O(n) Space O(n)
+const undirectedPath = (edges, nodeA, nodeB) => {
+  const graph = createAdj(edges);
+
+  let [stack, seen] = [[nodeA], new Set()];
+
+  while (stack.length) {
+    let curr = stack.pop();
+    if (seen.has(curr)) continue;
+    if (curr === nodeB) return true;
+    seen.add(curr);
+    stack.push(...graph[curr]);
+  }
+
+  return false;
+};
+// Time O(n) Space O(n)
+const createAdj = (edges) => {
+  const graph = {};
+
+  for (const edge of edges) {
+    let [e1, e2] = edge;
+    if (!(e1 in graph)) graph[e1] = new Set();
+    if (!(e2 in graph)) graph[e2] = new Set();
+    graph[e1].add(e2);
+    graph[e2].add(e1);
+  }
+
+  return graph;
+};
