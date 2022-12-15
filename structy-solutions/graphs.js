@@ -1,4 +1,3 @@
-
 // * Has Path Iterative DFS
 // Time O(n) Space O(n)
 const hasPath = (graph, src, dst) => {
@@ -90,6 +89,7 @@ const connectedComponentsCount = (graph) => {
   }
   return count;
 };
+
 // ! Recursive DFS
 const explore = (graph, curr, visited) => {
   if (visited.has(curr.toString())) return false;
@@ -162,6 +162,7 @@ const islandCount = (grid) => {
 
   return count;
 };
+
 // ! Recursive DFS
 const explore = (grid, row, col, visited) => {
   const rowInBounds = 0 <= row && row < grid.length;
