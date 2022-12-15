@@ -149,3 +149,47 @@ const shortestPath = (edges, nodeA, nodeB) => {
 
   return -1;
 };
+// * Island Count 
+const islandCount = (grid) => {
+  // todo
+  let count = 0;
+  let visited = new Set();
+  for (let row = 0; row < grid.length; row++) {
+    for (let col = 0; col < grid[0].length; col++) {
+      if (explore(grid, row, col, visited) === true) count++;
+    }
+  }
+
+  return count;
+};
+// ! Recursive DFS
+const explore = (grid, row, col, visited) => {
+  const rowInBounds = 0 <= row && row < grid.length;
+  const colInBounds = 0 <= col && col < grid[0].length;
+  if (!rowInBounds || !colInBounds) return false;
+  if (grid[row][col] === "W") return false;
+
+  let pos = row + "," + col;
+  if (visited.has(pos)) return false;
+  visited.add(pos);
+
+  explore(grid, row + 1, col, visited);
+  explore(grid, row - 1, col, visited);
+  explore(grid, row, col + 1, visited);
+  explore(grid, row, col - 1, visited);
+
+  return true;
+};
+
+const minimumIsland = (grid) => {
+  let visited = new Set(),
+    minimum = Infinity;
+  // todo
+  for (let row = 0; row < grid.length; row++) {
+    for (let col = 0; col < grid[0].length; col++) {
+      const size = explore(grid, row, col, visited);
+      if (size > 0 && size < minimum) minimum = size;
+    }
+  }
+  return minimum;
+};
