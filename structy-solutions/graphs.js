@@ -317,3 +317,73 @@ const buildGraph = (numCourses, prereqs) => {
 
   return graph;
 };
+
+// * Best Bridge
+// Time O(rc) Space O(rc)
+const bestBridge = (grid) => {
+  // todo
+  let mainIsland;
+
+  for (let row = 0; row < grid.length; row++) {
+    for (let col = 0; col < grid[0].length; col++) {
+      let potentialIsland = traverseIsland(grid, row, col, new Set());
+      if (potentialIsland.size > 0) {
+        mainIsland = potentialIsland;
+        break;
+      }
+    }
+  }
+
+  const visited = new Set(mainIsland);
+  const queue = [];
+
+  for (let pos of mainIsland) {
+    let [row, col] = pos.split(",").map(Number);
+    queue.push([row, col, 0]);
+  }
+
+  while (queue.length) {
+    let [row, col, distance] = queue.pop();
+    const pos = row + "," + col;
+    if (grid[row][col] === "L" && !mainIsland.has(pos)) return distance - 1;
+
+    let moves = [
+      [0, 1],
+      [0, -1],
+      [1, 0],
+      [-1, 0],
+    ];
+
+    for (let move of moves) {
+      const [rowDelta, colDelta] = move;
+      const [rowChange, colChange] = [row + rowDelta, col + colDelta];
+      const movePos = rowChange + "," + colChange;
+      if (isInBounds(grid, rowChange, colChange) && !visited.has(movePos)) {
+        visited.add(movePos);
+        queue.unshift([rowChange, colChange, distance + 1]);
+      }
+    }
+  }
+};
+
+// ! Recursive DFS
+const traverseIsland = (grid, row, col, visited) => {
+  if (!isInBounds(grid, row, col) || grid[row][col] === "W") return visited;
+
+  const pos = row + "," + col;
+  if (visited.has(pos)) return visited;
+  visited.add(pos);
+
+  traverseIsland(grid, row + 1, col, visited);
+  traverseIsland(grid, row - 1, col, visited);
+  traverseIsland(grid, row, col + 1, visited);
+  traverseIsland(grid, row, col - 1, visited);
+
+  return visited;
+};
+
+const isInBounds = (grid, row, col) => {
+  const rowInBounds = 0 <= row && row < grid.length;
+  const colInBounds = 0 <= col && col < grid[0].length;
+  return rowInBounds && colInBounds;
+};
