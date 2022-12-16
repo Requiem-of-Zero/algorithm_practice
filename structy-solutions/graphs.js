@@ -235,3 +235,84 @@ const closestCarrot = (grid, startRow, startCol) => {
   }
   return -1;
 };
+
+// * Longest Path in Graph
+// Time O(e) Space O(n)
+const longestPath = (graph) => {
+  // todo
+  const distance = {};
+
+  for (const node in graph) {
+    if (graph[node].length === 0) {
+      distance[node] = 0;
+    }
+  }
+
+  for (const node in graph) {
+    traverseDistance(graph, node, distance);
+  }
+
+  return Math.max(...Object.values(distance));
+};
+
+const traverseDistance = (graph, node, distance) => {
+  if (node in distance) return distance[node];
+
+  let maxLength = 0;
+  for (const neighbor of graph[node]) {
+    const attempt = traverseDistance(graph, neighbor, distance);
+    if (attempt > maxLength) maxLength = attempt;
+  }
+
+  distance[node] = 1 + maxLength;
+  return distance[node];
+};
+
+// * Semesters Required DFS
+// Time O(p) Space O(c)
+const semestersRequired = (numCourses, prereqs) => {
+  // todo
+  const graph = buildGraph(numCourses, prereqs);
+  const distance = {};
+
+  for (let course in graph) {
+    if (graph[course].length === 0) {
+      distance[course] = 1;
+    }
+  }
+
+  for (let course in graph) {
+    traverseDistance(graph, course, distance);
+  }
+
+  return Math.max(...Object.values(distance));
+};
+
+const traverseDistance = (graph, node, distance) => {
+  if (node in distance) return distance[node];
+  let maxDistance = 0;
+
+  for (let neighbor of graph[node]) {
+    let neighborDistance = traverseDistance(graph, neighbor, distance);
+    if (neighborDistance > maxDistance) maxDistance = neighborDistance;
+  }
+
+  distance[node] = 1 + maxDistance;
+  return distance[node];
+};
+
+// ! Create adj list for a directed acyclic graph
+const buildGraph = (numCourses, prereqs) => {
+  const graph = {};
+
+  for (let i = 0; i < numCourses; i++) {
+    graph[i] = [];
+  }
+
+  for (let prereq of prereqs) {
+    const [a, b] = prereq;
+    graph[a].push(b);
+  }
+
+  return graph;
+};
