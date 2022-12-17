@@ -387,3 +387,35 @@ const isInBounds = (grid, row, col) => {
   const colInBounds = 0 <= col && col < grid[0].length;
   return rowInBounds && colInBounds;
 };
+
+// * Detect cycle
+const hasCycle = (graph) => {
+  // todo
+  let visited = new Set(),
+    visiting = new Set();
+
+  for (let node in graph) {
+    if (detectCycle(graph, node, visiting, visited) === true) {
+      return true;
+    }
+  }
+  return false;
+};
+
+const detectCycle = (graph, node, visiting, visited) => {
+  if (visited.has(node)) return false;
+  if (visiting.has(node)) return true;
+
+  visiting.add(node);
+
+  for (let neighbor of graph[node]) {
+    if (detectCycle(graph, neighbor, visiting, visited) === true) {
+      return true;
+    }
+  }
+
+  visiting.delete(node);
+  visited.add(node);
+
+  return false;
+};
