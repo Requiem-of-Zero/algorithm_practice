@@ -388,7 +388,8 @@ const isInBounds = (grid, row, col) => {
   return rowInBounds && colInBounds;
 };
 
-// * Detect cycle
+// * Detect Cycle
+// ! Recursive with visiting and visited set
 const hasCycle = (graph) => {
   // todo
   let visited = new Set(),
@@ -416,6 +417,23 @@ const detectCycle = (graph, node, visiting, visited) => {
 
   visiting.delete(node);
   visited.add(node);
+
+  return false;
+};
+
+// * Iterative Has Cycle
+const hasCycle = (graph) => {
+  // todo
+  let [queue, visited] = [Object.keys(graph), new Set()];
+
+  while (queue.length) {
+    let curr = queue.shift();
+    if (graph[curr].length > 0) visited.add(curr);
+
+    for (const neighbor of graph[curr]) {
+      if (visited.has(neighbor)) return true;
+    }
+  }
 
   return false;
 };
