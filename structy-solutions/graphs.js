@@ -484,3 +484,51 @@ const createGraph = (numCourses, prereqs) => {
 
   return graph;
 };
+
+
+// * Knight Attacks BFS
+// Time O(n^2) Space O(n^2)
+const knightAttack = (n, kr, kc, pr, pc) => {
+  // todo
+  const visited = new Set();
+  visited.add(kr + "," + kc);
+  const queue = [[kr, kc, 0]];
+
+  while (queue.length) {
+    const [r, c, step] = queue.shift();
+    if (r === pr && c === pc) return step;
+    const neighbors = getKnightMoves(n, r, c);
+    for (let neighbor of neighbors) {
+      const [neighborRow, neighborCol] = neighbor;
+      const neighborPos = neighborRow + "," + neighborCol;
+      if (!visited.has(neighborPos)) {
+        queue.push([neighborRow, neighborCol, step + 1]);
+        visited.add(neighborPos);
+      }
+    }
+  }
+  return null;
+};
+
+const getKnightMoves = (n, r, c) => {
+  const positions = [
+    [r + 2, c + 1],
+    [r - 2, c + 1],
+    [r + 2, c - 1],
+    [r - 2, c - 1],
+    [r + 1, c + 2],
+    [r - 1, c + 2],
+    [r + 1, c - 2],
+    [r - 1, c - 2],
+  ];
+
+  const inboundsPos = [];
+  for (let pos of positions) {
+    const [newRow, newCol] = pos;
+    if (0 <= newRow && newRow < n && 0 <= newCol && newCol < n) {
+      inboundsPos.push(pos);
+    }
+  }
+
+  return inboundsPos;
+};
