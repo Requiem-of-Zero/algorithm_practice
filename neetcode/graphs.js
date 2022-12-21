@@ -92,3 +92,93 @@ const dfs = (node, seen) => {
   return clone;
 };
 
+// * #417 Pacific Atlantic Waterflow
+var pacificAtlantic = function (heights) {
+  const [pacificReachable, atlanticReachable] = search(heights);
+
+  return searchGrid(heights, pacificReachable, atlanticReachable);
+};
+
+const search = (heights) => {
+  const [rows, cols] = [heights.length, heights[0].length];
+  const [pacificReachable, atlanticReachable] = [
+    getMatrix(rows, cols),
+    getMatrix(rows, cols),
+  ];
+
+  searchRows(heights, rows, cols, pacificReachable, atlanticReachable);
+  searchCols(heights, rows, cols, pacificReachable, atlanticReachable);
+
+  return [pacificReachable, atlanticReachable];
+};
+
+const searchRows = (
+  heights,
+  rows,
+  cols,
+  pacificReachable,
+  atlanticReachable
+) => {
+  for (let row = 0; row < rows; row++) {
+    const [pacificStart, atlanticStart] = [0, cols - 1];
+
+    dfs(row, pacificStart, rows, cols, pacificReachable, heights);
+    dfs(row, atlanticStart, rows, cols, atlanticReachable, heights);
+  }
+};
+
+var searchCols = (heights, rows, cols, pacificReachable, atlanticReachable) => {
+  for (let col = 0; col < cols; col++) {
+    const [pacificStart, atlanticStart] = [0, rows - 1];
+
+    dfs(pacificStart, col, rows, cols, pacificReachable, heights);
+    dfs(atlanticStart, col, rows, cols, atlanticReachable, heights);
+  }
+};
+
+const searchGrid = (
+  heights,
+  pacificReachable,
+  atlanticReachable,
+  intersection = []
+) => {
+  const [rows, cols] = [heights.length, heights[0].length];
+
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      const isReachable =
+        pacificReachable[row][col] && atlanticReachable[row][col];
+      if (!isReachable) continue;
+
+      intersection.push([row, col]);
+    }
+  }
+  return intersection;
+};
+
+const dfs = (row, col, rows, cols, isReachable, heights) => {
+  isReachable[row][col] = true;
+
+  for (const [_row, _col] of getNeighbors(row, rows, col, cols)) {
+    if (isReachable[_row][_col]) continue;
+    const isLower = heights[_row][_col] < heights[row][col];
+    if (isLower) continue;
+
+    dfs(_row, _col, rows, cols, isReachable, heights);
+  }
+};
+
+var getNeighbors = (row, rows, col, cols) =>
+  [
+    [0, 1],
+    [0, -1],
+    [1, 0],
+    [-1, 0],
+  ]
+    .map(([_row, _col]) => [row + _row, col + _col])
+    .filter(
+      ([_row, _col]) => 0 <= _row && _row < rows && 0 <= _col && _col < cols
+    );
+
+const getMatrix = (rows, cols) =>
+  new Array(rows).fill().map(() => new Array(cols).fill(false));
