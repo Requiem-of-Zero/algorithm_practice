@@ -70,3 +70,25 @@ var numIslands = function (grid) {
 //     .filter(
 //       ([_row, _col]) => 0 <= _row && _row < rows && 0 <= _col && _col < cols
 //     );
+
+// * #133 Clone Graph
+// Time O(n) Space O(n)
+var cloneGraph = function (node, seen = new Map()) {
+  if (!node) return null;
+  if (seen.has(node)) return seen.get(node);
+  return dfs(node, seen);
+};
+// ! Recursive DFS
+const dfs = (node, seen) => {
+  const clone = new Node(node.val);
+
+  seen.set(node, clone);
+
+  for (const neighbor of node.neighbors) {
+    const cloneNeighbor = cloneGraph(neighbor, seen);
+    clone.neighbors.push(cloneNeighbor);
+  }
+
+  return clone;
+};
+
