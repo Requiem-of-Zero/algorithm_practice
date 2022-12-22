@@ -1,7 +1,7 @@
 // * #200. Number of Islands
 // Time O(rc) Space O(rc) rc for row and col
 var numIslands = function (grid) {
-    // ! Recursive DFS
+  // ! Recursive DFS
   const explore = (grid, currRow, currCol, visited) => {
     const rowInbounds = 0 <= currRow && currRow < grid.length;
     const colInbounds = 0 <= currCol && currCol < grid[0].length;
@@ -183,41 +183,41 @@ var getNeighbors = (row, rows, col, cols) =>
 const getMatrix = (rows, cols) =>
   new Array(rows).fill().map(() => new Array(cols).fill(false));
 
-  const createGraph = (numCourses, edges) => {
-    const graph = Array.from({ length: numCourses }, () => []);
+// * Course Schedule can finish neetcode
+const createGraph = (numCourses, edges) => {
+  const graph = Array.from({ length: numCourses }, () => []);
 
-    for (let edge of edges) {
-      let [a, b] = edge;
+  for (let edge of edges) {
+    let [a, b] = edge;
 
-      if (!(a in graph)) graph[a] = [];
-      if (!(b in graph)) graph[b] = [];
-      graph[a].push(b);
+    if (!(a in graph)) graph[a] = [];
+    if (!(b in graph)) graph[b] = [];
+    graph[a].push(b);
+  }
+
+  return graph;
+};
+
+var canFinish = function (numCourses, prerequisites) {
+  const graph = createGraph(numCourses, prerequisites);
+  let [seen, seeing] = [new Set(), new Set()];
+
+  function explore(course) {
+    if (seen.has(course)) return true;
+    if (seeing.has(course)) return false;
+
+    seeing.add(course);
+    for (let neighbor of graph[course]) {
+      if (!explore(neighbor)) return false;
     }
 
-    return graph;
-  };
-
-  // * Course Schedule can finish neetcode
-  var canFinish = function (numCourses, prerequisites) {
-    const graph = createGraph(numCourses, prerequisites);
-    let [seen, seeing] = [new Set(), new Set()];
-
-    function explore(course) {
-      if (seen.has(course)) return true;
-      if (seeing.has(course)) return false;
-
-      seeing.add(course);
-      for (let neighbor of graph[course]) {
-        if (!explore(neighbor)) return false;
-      }
-
-      seen.add(course);
-      seeing.delete(course);
-      return true;
-    }
-
-    for (let i = 0; i < numCourses; i++) {
-      if (!explore(i)) return false;
-    }
+    seen.add(course);
+    seeing.delete(course);
     return true;
-  };
+  }
+
+  for (let i = 0; i < numCourses; i++) {
+    if (!explore(i)) return false;
+  }
+  return true;
+};
