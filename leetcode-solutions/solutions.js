@@ -341,3 +341,27 @@ var countMatches = function (items, ruleKey, ruleValue) {
   }
   return count;
 };
+
+// * #94 Binary Tree Inorder Traversal
+var inorderTraversal = function (root, array = []) {
+  if (root) {
+    inorderTraversal(root.left, array);
+    array.push(root.val);
+    inorderTraversal(root.right, array);
+  }
+
+  return array;
+};
+
+// * #1920 Build Array
+
+var buildArray = function (nums) {
+  const resultArr = [];
+
+  for (let i = 0; i < nums.length; i++) {
+    let numIdx = nums[i];
+    resultArr.push(nums[numIdx]);
+  }
+
+  return resultArr;
+};
