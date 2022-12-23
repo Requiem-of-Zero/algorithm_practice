@@ -365,3 +365,15 @@ var buildArray = function (nums) {
 
   return resultArr;
 };
+
+// * #1920 Build Array From Permutation
+var buildArray = function (nums) {
+  const resultArr = [];
+
+  for (let i = 0; i < nums.length; i++) {
+    let numIdx = nums[i];
+    resultArr.push(nums[numIdx]);
+  }
+
+  return resultArr;
+};
