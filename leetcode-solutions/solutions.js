@@ -283,3 +283,34 @@ var deepestLeavesSum = function (root) {
 
   return prev;
 };
+
+// * Most words found
+var mostWordsFound = function (sentences) {
+  let max = 0;
+
+  for (let i = 0; i < sentences.length; i++) {
+    let splitSentence = sentences[i].split(" ").length;
+    max = Math.max(max, splitSentence);
+  }
+  return max;
+};
+
+
+
+// * 1773 Count Matches
+// Time O(n) Space O(1)
+var countMatches = function (items, ruleKey, ruleValue) {
+  let count = 0;
+
+  for (let i = 0; i < items.length; i++) {
+    let [type, color, name] = items[i];
+
+    if (
+      (ruleKey === "type" && ruleValue === type) ||
+      (ruleKey === "color" && ruleValue === color) ||
+      (ruleKey === "name" && ruleValue === name)
+    )
+      count++;
+  }
+  return count;
+};
