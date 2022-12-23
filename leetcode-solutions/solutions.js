@@ -295,7 +295,34 @@ var mostWordsFound = function (sentences) {
   return max;
 };
 
+// * #2325 Decode Message
+// Time O(2n) Space O(n)
+var decodeMessage = function (key, message) {
+  let alphabets = "abcdefghijklmnopqrstuvwxyz";
+  let hash = {};
+  let alphabetIdx = 0;
+  let resultStr = "";
 
+  for (let i = 0; i < key.length; i++) {
+    let indivKey = key[i];
+    if (indivKey in hash || indivKey === " ") {
+      continue;
+    } else {
+      hash[indivKey] = alphabets[alphabetIdx];
+      alphabetIdx++;
+    }
+  }
+
+  for (const char of message) {
+    if (char === " ") {
+      resultStr += " ";
+    } else {
+      resultStr += hash[char];
+    }
+  }
+
+  return resultStr;
+};
 
 // * 1773 Count Matches
 // Time O(n) Space O(1)
