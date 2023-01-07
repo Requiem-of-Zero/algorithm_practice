@@ -125,3 +125,22 @@ var maxProduct = function (nums) {
 
   return maxProduct;
 };
+
+// * #1725. Number Of Rectangles That Can Form The Largest Square
+// Time O(n) Space O(n)
+var countGoodRectangles = function (rectangles) {
+  const maxLen = [];
+  let count = 0;
+
+  for (const rectangle of rectangles) {
+    maxLen.push(Math.min(...rectangle));
+  }
+
+  let maxVal = Math.max(...maxLen);
+
+  for (const num of maxLen) {
+    if (num === maxVal) count++;
+  }
+
+  return count;
+};
