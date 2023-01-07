@@ -73,3 +73,39 @@ var countPairs = function (nums, k) {
   return count;
 };
 
+// * #1572. Matrix Diagonal Sum
+// Time O(n) Space O(1)
+var diagonalSum = function(mat) {
+    let visited = new Set(), sum = 0;
+    leftDiagSum(mat, visited) 
+    rightDiagSum(mat, visited)
+
+    for(const pos of visited){
+        let [row, col] = pos.split(',')
+        sum += mat[+row][+col]
+    }
+
+    return sum
+};
+
+const leftDiagSum = (matrix, visited) => {
+
+    for(let i = 0; i < matrix.length; i++){
+        let pos = `${i}, ${i}`
+        visited.add(pos)
+        if(visited.has(pos)) continue
+    }
+
+    return visited;
+}
+
+const rightDiagSum = (matrix, visited) => {
+
+    for(let i=matrix.length-1; 0 <= i; i--){
+        pos = `${(matrix.length-1) - i}, ${i}`
+        visited.add(pos)
+        if(visited.has(pos)) continue
+    }
+
+    return visited
+}
