@@ -38,7 +38,7 @@ var maxProductDifference = function (nums) {
 };
 
 // * #832. Flipping an Image
-// Time O(n^2) Space O(n) 
+// Time O(n^2) Space O(1) 
 var flipAndInvertImage = function (image) {
   for (const row of image) {
     row.reverse();
@@ -74,13 +74,15 @@ var countPairs = function (nums, k) {
 };
 
 // * #1572. Matrix Diagonal Sum
-// Time O(n) Space O(1)
+// Time O(n) Space O(n)
 var diagonalSum = function(mat) {
     let visited = new Set(), sum = 0;
-    leftDiagSum(mat, visited) 
+
+    leftDiagSum(mat, visited)
+
     rightDiagSum(mat, visited)
 
-    for(const pos of visited){
+    for(const pos of visited){ 
         let [row, col] = pos.split(',')
         sum += mat[+row][+col]
     }
@@ -109,3 +111,17 @@ const rightDiagSum = (matrix, visited) => {
 
     return visited
 }
+
+// * #1464. Maximum Product of Two Elements in an Array
+// Time O(nlogn) Space O(n)
+var maxProduct = function (nums) {
+  nums.sort((a, b) => a - b);
+  let [maxProduct, right] = [0, nums.length - 1];
+
+  for (let left = 0; left < nums.length - 1; left++) {
+    let product = (nums[left] - 1) * (nums[right] - 1);
+    maxProduct = Math.max(product, maxProduct);
+  }
+
+  return maxProduct;
+};
