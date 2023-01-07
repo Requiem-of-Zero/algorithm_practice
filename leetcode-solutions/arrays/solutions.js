@@ -144,3 +144,23 @@ var countGoodRectangles = function (rectangles) {
 
   return count;
 };
+
+// * #2108. Find First Palindromic String in the Array
+// Time O(n ^ 2) Space O(1)
+var firstPalindrome = function (words) {
+  for (const word of words) {
+    if (isPalindrome(word)) return word;
+  }
+
+  return "";
+};
+
+const isPalindrome = (word) => {
+  let reversed = "";
+
+  for (let i = word.length - 1; 0 <= i; i--) {
+    reversed += word[i];
+  }
+
+  return word === reversed;
+};
