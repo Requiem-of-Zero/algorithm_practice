@@ -30,3 +30,11 @@ var sortPeople = function (names, heights) {
   return result;
 };
 
+// * #1913. Maximum Product Difference Between Two Pairs
+// Time O(n log n) Space O(1)
+var maxProductDifference = function (nums) {
+  let length = nums.length;
+  nums.sort((a, b) => a - b);
+  return nums[length - 1] * nums[length - 2] - nums[0] * nums[1];
+};
+
