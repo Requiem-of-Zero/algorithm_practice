@@ -164,3 +164,39 @@ const isPalindrome = (word) => {
 
   return word === reversed;
 };
+
+// * #1252. Cells with Odd Values in a Matrix
+// Time O(i * (m + n)) Space O(m x n)
+var oddCells = function (m, n, indices) {
+  let count = 0;
+  const matrix = new Array(m).fill(0).map(() => new Array(n).fill(0));
+
+  for (let index of indices) {
+    const [row, col] = index;
+    incrementRow(matrix[row]); // m
+    incrementCol(col, matrix); // n
+  }
+
+  let matrixValues = matrix.flat();
+
+  for (let i = 0; i < matrixValues.length; i++) {
+    if (matrixValues[i] % 2 !== 0) count++;
+  }
+
+  return count;
+};
+
+const incrementRow = (row) => {
+  for (let i = 0; i < row.length; i++) {
+    row[i]++;
+  }
+
+  return row;
+};
+
+const incrementCol = (colIdx, matrix) => {
+  for (let i = 0; i < matrix.length; i++) {
+    matrix[i][colIdx]++;
+  }
+  return matrix;
+};
