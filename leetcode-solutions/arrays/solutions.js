@@ -1,6 +1,5 @@
 // * #2037. Min Number of Moves to Seat Everyone
 // Time O(n log n) Space O(1)
-
 var minMovesToSeat = function (seats, students) {
   seats.sort((a, b) => a - b);
   students.sort((a, b) => a - b);
@@ -58,5 +57,19 @@ const invert = (arr) => {
   }
 
   return arr;
+};
+
+// * #2176. Count Equal and Divisible Pairs in an Array
+// Time O(n^2) Space O(1)
+var countPairs = function (nums, k) {
+  let count = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = i + 1; j < nums.length; j++) {
+      if ((i * j) % k === 0 && nums[i] == nums[j]) count++;
+    }
+  }
+
+  return count;
 };
 
