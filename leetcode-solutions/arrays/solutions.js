@@ -38,3 +38,25 @@ var maxProductDifference = function (nums) {
   return nums[length - 1] * nums[length - 2] - nums[0] * nums[1];
 };
 
+// * #832. Flipping an Image
+// Time O(n^2) Space O(n) 
+var flipAndInvertImage = function (image) {
+  for (const row of image) {
+    row.reverse();
+  }
+
+  for (const row of image) {
+    invert(row);
+  }
+
+  return image;
+};
+
+const invert = (arr) => {
+  for (let i = 0; i < arr.length; i++) {
+    arr[i] === 0 ? (arr[i] = 1) : (arr[i] = 0);
+  }
+
+  return arr;
+};
+
