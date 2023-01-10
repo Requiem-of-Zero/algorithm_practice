@@ -227,3 +227,30 @@ var prefixCount = function (words, pref) {
   });
   return count;
 };
+
+// * #1304. Find N Unique Integers Sum up to Zero
+// Time O(n) number of iterations for the given input number
+// Space O(n) for the number of numbers in the result array
+var sumZero = function (n) {
+  let [result, sum] = [[], 0];
+  if (n === 1) return [sum];
+  for (let i = 1; i < n; i++) {
+    result.push(i);
+    sum += i;
+  }
+  result.push(-sum);
+  return result;
+};
+
+// * #1295. Find Numbers with Even Number of Digits
+// Time O(n) n for number of numbers in nums
+// Space O(1) constant because the count does not depend on the size of the nums input
+var findNumbers = function (nums) {
+  let count = 0;
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i].toString().length % 2 === 0) {
+      count++;
+    }
+  }
+  return count;
+};
