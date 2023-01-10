@@ -38,7 +38,7 @@ var maxProductDifference = function (nums) {
 };
 
 // * #832. Flipping an Image
-// Time O(n^2) Space O(1) 
+// Time O(n^2) Space O(1)
 var flipAndInvertImage = function (image) {
   for (const row of image) {
     row.reverse();
@@ -75,42 +75,41 @@ var countPairs = function (nums, k) {
 
 // * #1572. Matrix Diagonal Sum
 // Time O(n) Space O(n)
-var diagonalSum = function(mat) {
-    let visited = new Set(), sum = 0;
+var diagonalSum = function (mat) {
+  let visited = new Set(),
+    sum = 0;
 
-    leftDiagSum(mat, visited)
+  leftDiagSum(mat, visited);
 
-    rightDiagSum(mat, visited)
+  rightDiagSum(mat, visited);
 
-    for(const pos of visited){ 
-        let [row, col] = pos.split(',')
-        sum += mat[+row][+col]
-    }
+  for (const pos of visited) {
+    let [row, col] = pos.split(",");
+    sum += mat[+row][+col];
+  }
 
-    return sum
+  return sum;
 };
 
 const leftDiagSum = (matrix, visited) => {
+  for (let i = 0; i < matrix.length; i++) {
+    let pos = `${i}, ${i}`;
+    visited.add(pos);
+    if (visited.has(pos)) continue;
+  }
 
-    for(let i = 0; i < matrix.length; i++){
-        let pos = `${i}, ${i}`
-        visited.add(pos)
-        if(visited.has(pos)) continue
-    }
-
-    return visited;
-}
+  return visited;
+};
 
 const rightDiagSum = (matrix, visited) => {
+  for (let i = matrix.length - 1; 0 <= i; i--) {
+    pos = `${matrix.length - 1 - i}, ${i}`;
+    visited.add(pos);
+    if (visited.has(pos)) continue;
+  }
 
-    for(let i=matrix.length-1; 0 <= i; i--){
-        pos = `${(matrix.length-1) - i}, ${i}`
-        visited.add(pos)
-        if(visited.has(pos)) continue
-    }
-
-    return visited
-}
+  return visited;
+};
 
 // * #1464. Maximum Product of Two Elements in an Array
 // Time O(nlogn) Space O(n)
@@ -199,4 +198,21 @@ const incrementCol = (colIdx, matrix) => {
     matrix[i][colIdx]++;
   }
   return matrix;
+};
+
+// * #1827. Minimum Operations to Make the Array Increasing
+// Time O(n) Space O(1)
+var minOperations = function (nums) {
+  let sum = 0;
+
+  for (let i = 1; i < nums.length; i++) {
+    let ahead = nums[i],
+      previous = nums[i - 1];
+    let diff = ahead - previous;
+    if (diff <= 0) {
+      ahead += Math.abs(diff) + 1;
+      sum += Math.abs(diff) + 1;
+    }
+  }
+  return sum;
 };
