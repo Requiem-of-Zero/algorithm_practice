@@ -216,3 +216,14 @@ var minOperations = function (nums) {
   }
   return sum;
 };
+
+// * #2185. Counting Words With a Given Prefix
+// Time O(n * m) n is len of words, m is len of pref
+// Space O(1) count does not depend on size of input
+var prefixCount = function (words, pref) {
+  let count = 0;
+  words.forEach((word) => {
+    if (word.indexOf(pref) === 0) count++;
+  });
+  return count;
+};
