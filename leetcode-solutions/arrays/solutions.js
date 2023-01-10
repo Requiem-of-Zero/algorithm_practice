@@ -254,3 +254,15 @@ var findNumbers = function (nums) {
   }
   return count;
 };
+
+// * #561. Array Partition
+// Time O(n log n) n being the number of nums
+// Space O(1) fixed number regardless of input 
+var arrayPairSum = function (nums) {
+  nums.sort((a, b) => a - b);
+  let sum = 0;
+  for (let i = 0; i < nums.length; i += 2) {
+    sum += nums[i];
+  }
+  return sum;
+};
