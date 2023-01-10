@@ -280,3 +280,47 @@ var diStringMatch = function (s) {
   res.push(low);
   return res;
 };
+
+// * #1979. Find Greatest Common Divisor of Array
+// Time O(n) n being len of inputs in nums array
+// Space O(1) res is fixed doesn't change to input
+var findGCD = function (nums) {
+  let [max, min, res] = [Math.max(...nums), Math.min(...nums), 1];
+
+  for (let i = 1; i <= max; i++) {
+    if (max % i === 0 && min % i === 0) res = i;
+  }
+
+  return res;
+};
+
+// * #2089. Find Target Indices After Sorting Array
+// Time O(n log n) n being numbers in input nums
+// Space O(n) n being size of result correlates to the input array
+var targetIndices = function (nums, target) {
+  let result = [];
+  if (nums.length === 0) return result;
+  nums.sort((a, b) => a - b);
+
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] === target) result.push(i);
+  }
+
+  return result;
+};
+
+// * #2341. Maximum Number of Pairs in Array
+// Time O(n)
+// Space O(n)
+var numberOfPairs = function (nums) {
+  let numsMap = {},
+    res = [0, 0];
+  nums.forEach((num) => (numsMap[num] = 1 + (numsMap[num] || 0)));
+
+  for (let num of Object.values(numsMap)) {
+    res[0] += Math.floor(num / 2);
+    res[1] += num % 2;
+  }
+
+  return res;
+};
