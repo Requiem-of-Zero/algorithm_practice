@@ -266,3 +266,17 @@ var arrayPairSum = function (nums) {
   }
   return sum;
 };
+
+// * #942. DI String Match
+// Time O(n) n being length of input string
+// Space O(n) n being the size of the resulting array
+var diStringMatch = function (s) {
+  let [low, high, res] = [0, s.length, []];
+
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === "I") res.push(low++);
+    else res.push(high--);
+  }
+  res.push(low);
+  return res;
+};
