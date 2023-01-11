@@ -460,3 +460,16 @@ var isColumnIncreasing = function (column, A) {
 
   return true;
 };
+// ! Alternative solution
+var minDeletionSize = function (A) {
+  let count = 0;
+  for (let i = 0; i < A[0].length; i++) {
+    for (let j = 1; j < A.length; j++) {
+      if (A[j - 1][i] > A[j][i]) {
+        count++;
+        break;
+      }
+    }
+  }
+  return count;
+};
