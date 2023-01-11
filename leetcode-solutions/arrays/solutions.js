@@ -432,3 +432,31 @@ var countNegatives = function (grid) {
 
   return negativeCount;
 };
+
+// * #944. Delete Columns to Make Sorted
+// Time O(n * m)
+// Space O(1)
+var minDeletionSize = function (A) {
+  let count = 0;
+
+  for (let i = 0; i < A[0].length; i++) {
+    if (!isColumnIncreasing(i, A)) {
+      count++;
+    }
+  }
+
+  return count;
+};
+
+var isColumnIncreasing = function (column, A) {
+  let char = A[0][column];
+
+  for (let i = 1; i < A.length; i++) {
+    if (char > A[i][column]) {
+      return false;
+    }
+    char = A[i][column];
+  }
+
+  return true;
+};
