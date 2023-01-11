@@ -403,3 +403,16 @@ var mergeSimilarItems = function (items1, items2) {
 
   return similar;
 };
+
+// * #1051. Height Checker
+// Time O(nlogn)
+// Space O(1)
+var heightChecker = function (heights) {
+  let [expected, count] = [[...heights].sort((a, b) => a - b), 0];
+
+  for (let i = 0; i < heights.length; i++) {
+    if (heights[i] !== expected[i]) count++;
+  }
+
+  return count;
+};
