@@ -476,6 +476,18 @@ var minDeletionSize = function (A) {
 };
 
 // * #1299. Replace Elements with Greatest Element on Right Side
+// Time O(n)
+// Space O(1)
+var replaceElements = function (arr) {
+  let max = -1;
+  for (let i = arr.length - 1; i >= 0; i--) {
+    let temp = arr[i];
+    arr[i] = max;
+    max = Math.max(max, temp);
+  }
+  return arr;
+};
+
 // Time O(n^2)
 // Space O(n)
 var replaceElements = function (arr) {
