@@ -406,7 +406,7 @@ var mergeSimilarItems = function (items1, items2) {
 
 // * #1051. Height Checker
 // Time O(nlogn)
-// Space O(1)
+// Space O(n)
 var heightChecker = function (heights) {
   let [expected, count] = [[...heights].sort((a, b) => a - b), 0];
 
@@ -415,4 +415,20 @@ var heightChecker = function (heights) {
   }
 
   return count;
+};
+
+// * #1351. Count Negative Numbers in a Sorted Matrix
+// Time O(n * m)
+// Space O(1)
+var countNegatives = function (grid) {
+  let negativeCount = 0;
+
+  for (let row = 0; row < grid.length; row++) {
+    for (let col = 0; col < grid[0].length; col++) {
+      let curr = grid[row][col];
+      if (curr < 0) negativeCount++;
+    }
+  }
+
+  return negativeCount;
 };
