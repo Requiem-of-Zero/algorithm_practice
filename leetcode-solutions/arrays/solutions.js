@@ -341,3 +341,16 @@ var maximumCount = function (nums) {
   return pos === 0 ? neg : pos;
 };
 
+// * #1450. Number of Students Doing Homework at a Given Time
+// Time O(n)
+// Space O(1)
+var busyStudent = function (startTime, endTime, queryTime) {
+  let busy = 0;
+
+  for (let i = 0; i < startTime.length; i++) {
+    let [studentStart, studentEnd] = [startTime[i], endTime[i]];
+    if (studentEnd >= queryTime && studentStart <= queryTime) busy++;
+  }
+
+  return busy;
+};
