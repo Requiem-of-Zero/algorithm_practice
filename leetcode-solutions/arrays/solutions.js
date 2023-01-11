@@ -354,3 +354,28 @@ var busyStudent = function (startTime, endTime, queryTime) {
 
   return busy;
 };
+
+// * #1475. Final Prices With a Special Discount in a Shop
+// Time O(n)
+// Space O(n)
+var finalPrices = function (prices) {
+  let [left, right, discounted] = [0, 1, []];
+
+  while (discounted.length !== prices.length) {
+    if (right > left && prices[right] <= prices[left]) {
+      discounted.push(prices[left] - prices[right]);
+      left++;
+      right = left;
+    }
+
+    if (right > prices.length - 1) {
+      discounted.push(prices[left]);
+      left++;
+      right = left;
+    }
+
+    right++;
+  }
+
+  return discounted;
+};
