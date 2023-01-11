@@ -379,3 +379,27 @@ var finalPrices = function (prices) {
 
   return discounted;
 };
+
+// * #2363. Merge Similar Items
+// Time O(n)
+// Space O(n)
+var mergeSimilarItems = function (items1, items2) {
+  let weightHash = {},
+    similar = [];
+
+  items1.forEach((item) => {
+    let [idx, weight] = item;
+    !weightHash[idx] ? (weightHash[idx] = weight) : (weightHash[idx] += weight);
+  });
+
+  items2.forEach((item) => {
+    let [idx, weight] = item;
+    !weightHash[idx] ? (weightHash[idx] = weight) : (weightHash[idx] += weight);
+  });
+
+  for (const [idx, weight] of Object.entries(weightHash)) {
+    similar.push([idx, weight]);
+  }
+
+  return similar;
+};
