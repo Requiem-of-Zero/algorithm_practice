@@ -324,3 +324,20 @@ var numberOfPairs = function (nums) {
 
   return res;
 };
+
+// * #2529. Maximum Count of Positive Integer and Negative Integer
+// Time O(n)
+// Space O(1)
+var maximumCount = function (nums) {
+  let [pos, neg] = [0, 0];
+
+  for (const num of nums) {
+    if (num > 0) pos++;
+    if (num < 0) neg++;
+  }
+
+  if (pos !== 0 && neg !== 0) return Math.max(pos, neg);
+
+  return pos === 0 ? neg : pos;
+};
+
