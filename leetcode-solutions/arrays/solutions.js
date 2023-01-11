@@ -460,6 +460,7 @@ var isColumnIncreasing = function (column, A) {
 
   return true;
 };
+
 // ! Alternative solution
 var minDeletionSize = function (A) {
   let count = 0;
@@ -473,3 +474,42 @@ var minDeletionSize = function (A) {
   }
   return count;
 };
+
+// * #1299. Replace Elements with Greatest Element on Right Side
+// Time O(n^2)
+// Space O(n)
+var replaceElements = function (arr) {
+  if (arr.length === 1 || arr.length === 0) return [-1];
+
+  let res = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    let greatest = 0;
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[j] > greatest) greatest = arr[j];
+    }
+    i !== arr.length - 1 ? res.push(greatest) : res.push(-1);
+  }
+
+  return res;
+};
+
+// var replaceElements = function (arr) {
+//   if (arr.length === 1 || arr.length === 0) return [-1];
+
+//   let res = [],
+//     left = 0,
+//     right = 1,
+//     greatest = 0;
+
+//   while (res.length !== arr.length) {
+//     if (left === arr.length - 1) {
+//       res.push(-1);
+//       break;
+//     }
+
+//     right++;
+//   }
+
+//   return res;
+// };
