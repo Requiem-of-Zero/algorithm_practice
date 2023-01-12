@@ -543,3 +543,16 @@ var maximumUnits = function (boxTypes, truckSize) {
 
   return ans;
 };
+
+// * #2255. Count Prefixes of a Given String
+// Time O(n * m)
+// Space O(1)
+var countPrefixes = function (words, s) {
+  let count = 0;
+
+  for (const word of words) {
+    if (s.indexOf(word) === 0) count++;
+  }
+
+  return count;
+};
