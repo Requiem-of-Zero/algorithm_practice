@@ -556,3 +556,30 @@ var countPrefixes = function (words, s) {
 
   return count;
 };
+
+
+// * #2032. Two Out of Three
+// Time O(n)
+// Space O(n)
+var twoOutOfThree = function (nums1, nums2, nums3) {
+  let [set1, set2, set3, res] = [
+    new Set(nums1),
+    new Set(nums2),
+    new Set(nums3),
+    new Set(),
+  ];
+
+  for (const num of set1) {
+    if (set2.has(num) || set3.has(num)) res.add(num);
+  }
+
+  for (const num of set2) {
+    if (set1.has(num) || set3.has(num)) res.add(num);
+  }
+
+  for (const num of set3) {
+    if (set1.has(num) || set2.has(num)) res.add(num);
+  }
+
+  return [...res];
+};
