@@ -616,3 +616,19 @@ var kWeakestRows = function (mat, k) {
     }, [])
     .slice(0, k);
 };
+
+// * #1403. Minimum Subsequence in Non-Increasing Order
+// Time O(nlogn)
+// Space O(n)
+var minSubsequence = function (nums) {
+  nums.sort((a, b) => a - b);
+  let sum = nums.reduce((total, num) => total + num);
+  let res = [],
+    newSum = 0;
+  while (sum >= newSum) {
+    let x = nums.pop();
+    res.push(x);
+    (sum -= x), (newSum += x);
+  }
+  return res;
+};
