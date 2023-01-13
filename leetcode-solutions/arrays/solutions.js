@@ -583,3 +583,28 @@ var twoOutOfThree = function (nums1, nums2, nums3) {
 
   return [...res];
 };
+
+// * #1337. The K Weakest Rows in a Matrix
+// Time O(r * c)
+// Space O(f)
+var kWeakestRows = function (mat, k) {
+  //Step 1:
+  let freqMap = {};
+  for (let i = 0; i < mat.length; i++) {
+    // Step 2:
+    let count = mat[i].lastIndexOf(1) + 1;
+    // Step 3:
+    if (freqMap[count] !== undefined) {
+      freqMap[count] = [...freqMap[count], i];
+    } else {
+      freqMap[count] = [i];
+    }
+  }
+  // Step 4 & 5
+  return Object.values(freqMap)
+    .reduce((arr, itm) => {
+      arr = [...arr, ...itm];
+      return arr;
+    }, [])
+    .slice(0, k);
+};
