@@ -584,6 +584,14 @@ var twoOutOfThree = function (nums1, nums2, nums3) {
   return [...res];
 };
 
+// * #2357. Make Array Zero by Subtracting Equal Amounts
+// Time O(n)
+// Space O(n)
+var minimumOperations = function (nums) {
+  let k = new Set(nums);
+  return k.has(0) ? k.size - 1 : k.size;
+};
+
 // * #1337. The K Weakest Rows in a Matrix
 // Time O(r * c)
 // Space O(f)
