@@ -632,3 +632,27 @@ var minSubsequence = function (nums) {
   }
   return res;
 };
+
+// * #2496. Maximum Value of a String in an Array
+// Time O(n * m)
+// Space O(1)
+var maximumValue = function (strs) {
+  let max = 0;
+
+  for (const str of strs) {
+    if (wordHasCharacters(str)) max = Math.max(max, str.length);
+    else max = Math.max(max, +str);
+  }
+
+  return max;
+};
+
+const wordHasCharacters = (word) => {
+  let hasChar = false;
+
+  for (const char of word) {
+    if (char.match(/[a-z]/i)) hasChar = true;
+  }
+
+  return hasChar;
+};
