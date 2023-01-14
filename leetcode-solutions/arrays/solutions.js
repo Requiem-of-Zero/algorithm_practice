@@ -664,3 +664,30 @@ var sortedSquares = function (nums) {
   let squared = nums.map((num) => num ** 2);
   return squared.sort((a, b) => a - b);
 };
+
+// * #821. Shortest Distance to a Character
+// Time O(n * m)
+// Space O(n)
+var shortestToChar = function (S, C) {
+  let results = [];
+
+  for (let i = 0; i < S.length; i++) {
+    results.push(getDistance(i, S, C));
+  }
+
+  return results;
+};
+
+var getDistance = function (i, S, C) {
+  let index = 0;
+  let isInbounds = i + index < S.length || i - index > -1;
+  while (isInbounds) {
+    if (S[i + index] == C || S[i - index] == C) {
+      return index;
+    }
+
+    index++;
+  }
+
+  return index;
+};
