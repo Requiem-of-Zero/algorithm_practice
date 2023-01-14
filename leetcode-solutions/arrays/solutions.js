@@ -656,3 +656,11 @@ const wordHasCharacters = (word) => {
 
   return hasChar;
 };
+
+// * #977. Squares of a Sorted Array
+// Time O(n log n)
+// Space O(n)
+var sortedSquares = function (nums) {
+  let squared = nums.map((num) => num ** 2);
+  return squared.sort((a, b) => a - b);
+};
