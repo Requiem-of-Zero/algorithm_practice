@@ -691,3 +691,33 @@ var getDistance = function (i, S, C) {
 
   return index;
 };
+
+// * #2535. Difference Between Element Sum and Digit Sum of an Array
+// Time O(n)
+// Space O(n)
+var differenceOfSum = function (nums) {
+  let elementSum = getElementSum(nums);
+  let digitSum = getDigitSum(nums);
+  return Math.abs(elementSum - digitSum);
+};
+
+const getElementSum = (nums) => {
+  let sum = 0;
+
+  for (const num of nums) {
+    sum += num;
+  }
+
+  return sum;
+};
+
+const getDigitSum = (nums) => {
+  let strNum = nums.join(""),
+    sum = 0;
+
+  for (const num of strNum) {
+    sum += +num;
+  }
+
+  return sum;
+};
