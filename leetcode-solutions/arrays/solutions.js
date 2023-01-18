@@ -817,3 +817,49 @@ const getMaxInColumn = (matrix, column) => {
 
   return Math.max(...max);
 };
+
+// * #2475. Number of Unequal Triplets in Array
+// Time O(n^3)
+// Space O(1)
+var unequalTriplets = function (nums) {
+  let count = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = i + 1; j < nums.length; j++) {
+      for (let k = j + 1; k < nums.length; k++) {
+        if (
+          nums[i] !== nums[j] &&
+          nums[i] !== nums[k] &&
+          nums[j] !== nums[k] &&
+          i < j &&
+          j < k
+        ) {
+          count++;
+        }
+      }
+    }
+  }
+
+  return count;
+};
+
+// Time O(n)
+// Space O(n)
+var unequalTriplets = function (nums) {
+  let count = 0,
+    prev = 0,
+    nxt = nums.length;
+  let frequencies = nums.reduce((count, currentValue) => {
+    return (
+      count[currentValue] ? ++count[currentValue] : (count[currentValue] = 1),
+      count
+    );
+  }, {});
+
+  for (freq of Object.values(frequencies)) {
+    nxt -= freq;
+    count += prev * freq * nxt;
+    prev += freq;
+  }
+  return count;
+};
