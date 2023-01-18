@@ -923,3 +923,25 @@ var generate = function (numRows) {
   }
   return result;
 };
+
+// * #1200. Minimum Absolute Difference
+// Time O(n log n)
+// Space O(n)
+var minimumAbsDifference = function (arr) {
+  let minDiff = Infinity;
+  let output = [];
+
+  arr = arr.sort((a, b) => a - b);
+
+  for (let i = 0; i < arr.length - 1; i++) {
+    const diff = arr[i + 1] - arr[i];
+    if (diff < minDiff) {
+      minDiff = diff;
+      output = [[arr[i], arr[i + 1]]];
+    } else if (diff === minDiff) {
+      output.push([arr[i], arr[i + 1]]);
+    }
+  }
+
+  return output;
+};
