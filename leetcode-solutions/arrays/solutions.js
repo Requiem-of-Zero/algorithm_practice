@@ -721,3 +721,20 @@ const getDigitSum = (nums) => {
 
   return sum;
 };
+
+// * #1217. Minimum Cost to Move Chips to The Same Position
+// Time O(n)
+// Space O(1)
+var minCostToMoveChips = function (position) {
+  let [even, odd] = [0, 0];
+
+  for (const pos of position) {
+    if (pos % 2 === 0) {
+      even++;
+      continue;
+    }
+
+    odd++;
+  }
+  return Math.max(even, odd);
+};
