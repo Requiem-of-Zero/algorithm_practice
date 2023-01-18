@@ -879,3 +879,26 @@ var smallestEqual = function (nums) {
 
   return smallest.length ? Math.min(...smallest) : -1;
 };
+
+// * #2506. Count Pairs Of Similar Strings
+// Time O(n^2)
+// Space O(m)
+var similarPairs = function (words) {
+  let count = 0;
+
+  for (let i = 0; i < words.length; i++) {
+    for (let j = i + 1; j < words.length; j++) {
+      if (sameCharacters(words[i], words[j]) && i !== j) count++;
+    }
+  }
+  return count;
+};
+
+const sameCharacters = (word1, word2) => {
+  const [set1, set2] = [new Set(word1), new Set(word2)];
+  if (set1.size !== set2.size) {
+    return false;
+  }
+
+  return [...set1].every((char) => set2.has(char));
+};
