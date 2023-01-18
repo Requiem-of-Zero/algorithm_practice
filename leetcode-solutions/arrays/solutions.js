@@ -787,3 +787,33 @@ var checkDistances = function (s, distance) {
   }
   return true;
 };
+
+// * #1380. Lucky Numbers in a Matrix
+// Time O(n^2)
+// Space O(n)
+var luckyNumbers = function (matrix) {
+  let res = [];
+
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = 0; col < matrix[0].length; col++) {
+      let [columnMax, rowMin] = [
+        getMaxInColumn(matrix, col),
+        Math.min(...matrix[row]),
+      ];
+      if (matrix[row][col] === columnMax && matrix[row][col] === rowMin)
+        res.push(matrix[row][col]);
+    }
+  }
+
+  return res;
+};
+
+const getMaxInColumn = (matrix, column) => {
+  let max = [];
+
+  for (let row = 0; row < matrix.length; row++) {
+    max.push(matrix[row][column]);
+  }
+
+  return Math.max(...max);
+};
