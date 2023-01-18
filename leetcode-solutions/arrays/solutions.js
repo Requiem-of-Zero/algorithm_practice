@@ -756,3 +756,34 @@ var sortArrayByParityII = function (nums) {
   }
   return output;
 };
+
+// * #2399. Check Distances Between Same Letters
+// Time O(n)
+// Space O(1)
+var checkDistances = function (s, distance) {
+  let [alphaHash, alphabets, left, right] = [
+    {},
+    "abcdefghijklmnopqrstuvwxyz".split(""),
+    0,
+    1,
+  ];
+
+  alphabets.forEach((char, i) => (alphaHash[char] = i));
+
+  while (left < s.length) {
+    let [leftVal, rightVal] = [s[left], s[right]];
+    let currDistance = distance[alphaHash[leftVal]];
+
+    if (rightVal === leftVal && right - left - 1 !== currDistance) {
+      return false;
+    }
+
+    if (right > s.length) {
+      left++;
+      right = left;
+    }
+
+    right++;
+  }
+  return true;
+};
