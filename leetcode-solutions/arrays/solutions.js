@@ -863,3 +863,19 @@ var unequalTriplets = function (nums) {
   }
   return count;
 };
+
+// * #2057. Smallest Index With Equal Value
+// Time O(n)
+// Space O(n)
+var smallestEqual = function (nums) {
+  let smallest = [];
+
+  for (let i = 0; i < nums.length; i++) {
+    let num = nums[i];
+    if (i % 10 == num) {
+      smallest.push(i);
+    }
+  }
+
+  return smallest.length ? Math.min(...smallest) : -1;
+};
