@@ -738,3 +738,21 @@ var minCostToMoveChips = function (position) {
   }
   return Math.max(even, odd);
 };
+
+// * #922. Sort Array By Parity II
+// Time O(n)
+// Space O(n)
+var sortArrayByParityII = function (nums) {
+  const output = new Array(nums.length);
+  let [cursorOdd, cursorEven] = [1, 0];
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] % 2) {
+      output[cursorOdd] = nums[i];
+      cursorOdd += 2;
+    } else {
+      output[cursorEven] = nums[i];
+      cursorEven += 2;
+    }
+  }
+  return output;
+};
