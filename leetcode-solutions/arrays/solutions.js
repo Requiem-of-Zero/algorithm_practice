@@ -991,3 +991,20 @@ var sortedArrayToBST = function (nums) {
   return root;
 };
 
+// * #1030. Matrix Cells in Distance Order
+// Time O(r * c log r * c)
+// Space O(r * c)
+var allCellsDistOrder = function (R, C, r0, c0) {
+  const matrix = [];
+  for (let i = 0; i < R; i++) {
+    for (let j = 0; j < C; j++) {
+      matrix.push([i, j]);
+    }
+  }
+
+  return matrix.sort((a, b) => {
+    const bDiff = Math.abs(b[1] - c0) + Math.abs(b[0] - r0);
+    const aDiff = Math.abs(a[1] - c0) + Math.abs(a[0] - r0);
+    return aDiff - bDiff;
+  });
+};
