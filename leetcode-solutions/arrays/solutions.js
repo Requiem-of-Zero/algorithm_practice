@@ -945,3 +945,35 @@ var minimumAbsDifference = function (arr) {
 
   return output;
 };
+
+// * #463. Island Perimeter
+// Time O(n * m)
+// Space O(1)
+var islandPerimeter = function (grid) {
+  const rows = grid.length;
+  const cols = grid[0].length;
+  // initialize perimeter to be 0
+  var perimeter = 0;
+
+  for (var row = 0; row < rows; row++) {
+    for (var col = 0; col < cols; col++) {
+      // if the current pos is water continue to next iteration
+      if (!grid[row][col]) continue;
+
+      // perimeter will be 4 for every place with no land adjacent to another land
+      perimeter += 4;
+
+      // if row is inbounds and to the left of current pos is land subtract 1 from the current perimeter
+      if (row > 0 && grid[row - 1][col]) perimeter--;
+      // if the col is inbounds and to the top of the pos is land subtract 1 from the current perimeter
+      if (col > 0 && grid[row][col - 1]) perimeter--;
+      // if row is inbounds and to the right of the current pos is land subtract 1 from the current perimeter
+      if (row < rows - 1 && grid[row + 1][col]) perimeter--;
+      // if col is inbounds and to the bottom of the current post is land subtract 1 from the current perimeter
+      if (col < cols - 1 && grid[row][col + 1]) perimeter--;
+    }
+  }
+
+  return perimeter;
+};
+
