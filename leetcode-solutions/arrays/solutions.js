@@ -1074,3 +1074,17 @@ var commonChars = function (words) {
   }, []);
 };
 
+// * #766. Toeplitz Matrix
+// Time O(n * m)
+// Space O(1)
+var isToeplitzMatrix = function (matrix) {
+  for (var i = matrix.length - 1; i > 0; i--) {
+    if (
+      matrix[i].slice(1, matrix[i].length).join("") !==
+      matrix[i - 1].slice(0, matrix[i].length - 1).join("")
+    ) {
+      return false;
+    }
+  }
+  return true;
+};
