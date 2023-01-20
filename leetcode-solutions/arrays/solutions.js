@@ -1008,3 +1008,34 @@ var allCellsDistOrder = function (R, C, r0, c0) {
     return aDiff - bDiff;
   });
 };
+
+// * #1122. Relative Sort Array
+// Time O(n)
+// Space O(n)
+var relativeSortArray = function (arr1, arr2) {
+  let count = {};
+  let distinct = new Set(arr2);
+  let notIncluded = [];
+  let output = [];
+
+  arr1.forEach((ele) => {
+    if (count[ele] === undefined) count[ele] = 1;
+    else count[ele] += 1;
+  });
+
+  notIncluded = arr1.filter((ele) => !distinct.has(ele));
+
+  for (let i = 0; i < arr2.length; i++) {
+    let currDigit = arr2[i];
+    let repeatVal = count[currDigit];
+
+    for (let j = 0; j < repeatVal; j++) {
+      output.push(currDigit);
+    }
+  }
+
+  return output.concat(notIncluded.sort((a, b) => a - b));
+};
+
+// 
+
