@@ -1037,5 +1037,40 @@ var relativeSortArray = function (arr1, arr2) {
   return output.concat(notIncluded.sort((a, b) => a - b));
 };
 
-// 
+// * #1002. Find Common Characters
+// Time O(n)
+// Space O(n)
+var commonChars = function (words) {
+  const uniqueCharsPerStr = words.map((str) => {
+    return str.split("").reduce((map, curr) => {
+      map[curr] = (map[curr] || 0) + 1;
+      return map;
+    }, {});
+  });
+
+  const sharedUniqueChars = uniqueCharsPerStr.reduce((counts, strCounts) => {
+    Object.keys(strCounts).forEach((char) => {
+      if (!counts[char]) {
+        counts[char] = [];
+      }
+
+      counts[char].push(strCounts[char]);
+    });
+    return counts;
+  }, {});
+
+  let output = Object.keys(sharedUniqueChars)
+    // Filter out characters that don't exist in every string
+    .filter((key) => sharedUniqueChars[key].length === words.length)
+    // Determine the number of times to repeat each character
+    .map((key) => ({
+      key,
+      count: Math.min(...sharedUniqueChars[key]),
+    }));
+  // Create the output array
+
+  return output.reduce((str, char) => {
+    return str.concat(new Array(char.count).fill(char.key));
+  }, []);
+};
 
