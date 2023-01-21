@@ -1088,3 +1088,29 @@ var isToeplitzMatrix = function (matrix) {
   }
   return true;
 };
+
+// * #2248. Intersection of Multiple Arrays
+// Time O(n ^ 2)
+// Space O(n)
+var intersection = function (nums) {
+  let count = {};
+  let output = [];
+
+  for (let i = 0; i < nums.length; i++) {
+    let currArr = nums[i];
+    for (let j = 0; j < currArr.length; j++) {
+      let currVal = currArr[j];
+      if (count[currVal] === undefined) {
+        count[currVal] = [`${i},${j}`];
+      } else {
+        count[currVal].push(`${i},${j}`);
+      }
+    }
+  }
+
+  for (const [key, value] of Object.entries(count)) {
+    if (value.length === nums.length) output.push(key);
+  }
+
+  return output;
+};
