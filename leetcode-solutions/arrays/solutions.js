@@ -1114,3 +1114,23 @@ var intersection = function (nums) {
 
   return output;
 };
+
+// * #1700. Number of Students Unable to Eat Lunch
+// Time O(n)
+// Space O(1)
+var countStudents = function (students, sandwiches) {
+  // While there is a student and current sandwich has a match in students queue
+  while (students.length && students.indexOf(sandwiches[0]) !== -1) {
+    let [currStudent, currSandwich] = [students[0], sandwiches[0]];
+
+    if (currStudent === currSandwich) {
+      students.shift();
+      sandwiches.shift();
+    } else {
+      students.push(students.shift());
+    }
+  }
+
+  return students.length;
+};                                  
+
