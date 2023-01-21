@@ -1134,3 +1134,13 @@ var countStudents = function (students, sandwiches) {
   return students.length;
 };                                  
 
+// * #908. Smallest Range I
+// Time O(n)
+// Space O(1)
+var smallestRangeI = function (nums, k) {
+  const min = Math.min(...nums);
+  const max = Math.max(...nums);
+
+  if (max - min <= 2 * k) return 0;
+  return max - min - 2 * k;
+};
