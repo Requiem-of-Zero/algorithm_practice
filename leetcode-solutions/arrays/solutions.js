@@ -1150,3 +1150,31 @@ var numRookCaptures = function (board) {
   return xCaptures + yCaptures;
 };
 
+// * #1260. Shift 2D Grid
+// Time O(n * m)
+// Space O(n)
+var shiftGrid = function (grid, k) {
+  let [m, n] = [grid.length, grid[0].length];
+
+  const move = (grid) => {
+    for (let i = 0; i < m; i++) {
+      const current = [];
+      for (let j = 0; j < n; j++) {
+        current[j] = grid[i][j];
+        grid[i][j] = j === 0 ? grid[i][n - 1] : current[j - 1];
+      }
+    }
+
+    const current = [];
+    for (let i = 0; i < m; i++) {
+      current[i] = grid[i][0];
+      grid[i][0] = i === 0 ? grid[m - 1][0] : current[i - 1];
+    }
+  };
+
+  for (let i = 1; i <= k; i++) {
+    move(grid);
+  }
+
+  return grid;
+};
