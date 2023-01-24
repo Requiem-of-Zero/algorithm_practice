@@ -1203,3 +1203,33 @@ var canMakeArithmeticProgression = function (arr) {
   }
   return true;
 };
+
+// * #1160. Find Words That Can Be Formed by Characters
+// Time O(n * m)
+// Space O(m)
+var countCharacters = function (words, chars) {
+  const generateMap = (str) => {
+    let map = {};
+    for (let char of str) {
+      map[char] = 1 + (map[char] || 0);
+    }
+    return map;
+  };
+
+  let count = 0;
+
+  for (let word of words) {
+    let map = generateMap(chars);
+    let isValidWord = true;
+    for (let char of word) {
+      if (map[char] > 0) {
+        map[char] -= 1;
+      } else {
+        isValidWord = false;
+      }
+    }
+    if (isValidWord) count += word.length;
+  }
+
+  return count;
+};
