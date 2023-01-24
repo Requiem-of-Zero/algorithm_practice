@@ -1252,3 +1252,38 @@ var minStartValue = function (nums) {
 
   return output || 1;
 };
+
+// * #1779. Find Nearest Point That Has the Same X or Y Coordinate
+// Time O(n)
+// Space O(n)
+var nearestValidPoint = function (x, y, points) {
+  let [validPoints, manHattanDist, smallest] = [
+    [],
+    [],
+    Number.MAX_SAFE_INTEGER,
+  ];
+
+  for (const point of points) {
+    let [pointX, pointY] = point;
+    if (x === pointX || y === pointY) validPoints.push(point);
+    else validPoints.push([]);
+  }
+
+  for (const valid of validPoints) {
+    let distance = Math.abs(x - valid[0]) + Math.abs(y - valid[1]);
+    if (!valid.length) {
+      manHattanDist.push(9999999);
+    } else {
+      manHattanDist.push(distance);
+    }
+  }
+
+  let validMin = Math.min(...manHattanDist);
+
+  for (let i = 0; i < validPoints.length; i++) {
+    if (validMin === 9999999) continue;
+    if (manHattanDist[i] === validMin) return i;
+  }
+
+  return -1;
+};
