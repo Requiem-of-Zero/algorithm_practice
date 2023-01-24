@@ -1287,3 +1287,24 @@ var nearestValidPoint = function (x, y, points) {
 
   return -1;
 };
+
+// * #2460. Apply Operations to an Array
+// Time O(n)
+// Space (n)
+var applyOperations = function (nums) {
+  for (let i = 0; i < nums.length - 1; i++) {
+    if (nums[i] === nums[i + 1]) {
+      nums[i] *= 2;
+      nums[i + 1] = 0;
+    }
+  }
+
+  let [nonZeros, zeros] = [[], []];
+
+  for (const num of nums) {
+    if (num > 0) nonZeros.push(num);
+    else zeros.push(num);
+  }
+
+  return nonZeros.concat(zeros);
+};
