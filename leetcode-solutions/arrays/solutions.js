@@ -1191,3 +1191,15 @@ var findMaxK = function (nums) {
 
   return max;
 };
+
+// * #1502. Can Make Arithmetic Progression From Sequence
+// Time O(n log n)
+// Space O(1) 
+var canMakeArithmeticProgression = function (arr) {
+  let sorted = [...arr].sort((a, b) => a - b);
+  let diff = sorted[1] - sorted[0];
+  for (let i = 1; i < sorted.length - 1; i++) {
+    if (sorted[i + 1] - sorted[i] !== diff) return false;
+  }
+  return true;
+};
