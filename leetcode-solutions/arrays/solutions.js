@@ -1178,3 +1178,16 @@ var shiftGrid = function (grid, k) {
 
   return grid;
 };
+
+// * #2441. Largest Positive Integer That Exists With Its Negative
+// Time O(n)
+// Space O(n)
+var findMaxK = function (nums) {
+  let [max, numSet] = [-1, new Set(nums)];
+
+  for (const num of nums) {
+    if (num > max && numSet.has(-num)) max = num;
+  }
+
+  return max;
+};
