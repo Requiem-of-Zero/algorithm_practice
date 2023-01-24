@@ -1308,3 +1308,26 @@ var applyOperations = function (nums) {
 
   return nonZeros.concat(zeros);
 };
+
+// * #929. Unique Email Addresses
+// Time O(n * m)
+// Space O(n)
+var numUniqueEmails = function (emails) {
+  let emailSet = new Set();
+
+  for (const email of emails) {
+    const [local, domain] = email.split("@");
+    let current = "",
+      plus = false;
+    for (let i = 0; i < local.length; i++) {
+      let localChar = local[i];
+      if (localChar === ".") continue;
+      if (localChar === "+") plus = true;
+      if (plus === true) continue;
+      current += localChar;
+    }
+    emailSet.add(`${current}@${domain}`);
+  }
+
+  return emailSet.size;
+};
