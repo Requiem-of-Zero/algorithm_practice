@@ -1114,3 +1114,39 @@ var intersection = function (nums) {
 
   return output;
 };
+
+// * #999. Available Captures for Rook
+// Time O(n)
+// Space O(1)
+var numRookCaptures = function (board) {
+  let [x, y] = [0, 0];
+  for (let rowIdx in board) {
+    if (board[rowIdx].indexOf("R") != -1) {
+      [x, y] = [rowIdx, board[rowIdx].indexOf("R")];
+      break;
+    }
+  }
+
+  let [xCaptures, yCaptures, i, j] = [0, 0, 0, 0];
+
+  while (i < 8) {
+    if (board[i][y] === "p" || board[i][y] === "B") {
+      let num = +(board[i][y] === "p");
+      yCaptures = (i < x ? 0 : yCaptures) + num;
+      if (i > x) break;
+    }
+    i++;
+  }
+
+  while (j < 8) {
+    if (board[x][j] === "p" || board[x][j] === "B") {
+      let num = +(board[x][j] === "p");
+      xCaptures = (j < y ? 0 : xCaptures) + num;
+      if (j > y) break;
+    }
+    j++;
+  }
+
+  return xCaptures + yCaptures;
+};
+
