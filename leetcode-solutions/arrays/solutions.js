@@ -1233,3 +1233,22 @@ var countCharacters = function (words, chars) {
 
   return count;
 };
+
+// * #1413. Minimum Value to Get Positive Step by Step Sum
+// Time O(n)
+// Space O(1)
+var minStartValue = function (nums) {
+  let output = 0;
+  let currSum = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    if (currSum + nums[i] < 1) {
+      output += -(currSum + nums[i]) + 1;
+      currSum = 1;
+    } else {
+      currSum += nums[i];
+    }
+  }
+
+  return output || 1;
+};
