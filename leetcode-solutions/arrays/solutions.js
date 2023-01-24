@@ -1331,3 +1331,26 @@ var numUniqueEmails = function (emails) {
 
   return emailSet.size;
 };
+
+// * #2078. Two Furthest Houses With Different Colors
+// Time O(n)
+// Space O(1)
+var maxDistance = function (colors) {
+  let [furthest, left, right] = [0, 0, 1];
+
+  while (left < colors.length) {
+    if (colors[left] !== colors[right]) {
+      let distance = Math.abs(left - right);
+      furthest = Math.max(distance, furthest);
+    }
+
+    if (right > colors.length - 2) {
+      left++;
+      right = left;
+    }
+
+    right++;
+  }
+
+  return furthest;
+};
