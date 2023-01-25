@@ -1422,3 +1422,28 @@ const checkXMatrix = (grid) => {
   return true;
 };
 
+// * #806. Number of Lines To Write String
+// Time O(n)
+// Space O(1)
+var numberOfLines = function (widths, s) {
+  let currWidthSum = 0,
+    maxWidth = 100;
+  const output = [1, 0];
+  for (let i = 0; i < s.length; i++) {
+    const indexOfChar = s.charCodeAt(i) - 97;
+    currWidthSum += widths[indexOfChar];
+    if (currWidthSum > maxWidth) {
+      currWidthSum = 0;
+      output[0]++;
+      i--;
+    } else if (currWidthSum === 100) {
+      currWidthSum = 0;
+      output[0]++;
+    }
+  }
+
+  output[1] = currWidthSum || 100;
+  if (!currWidthSum) output[0]--;
+
+  return output;
+};
