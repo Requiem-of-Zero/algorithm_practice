@@ -1354,3 +1354,71 @@ var maxDistance = function (colors) {
 
   return furthest;
 };
+
+// * #2319. Check if Matrix Is X-Matrix
+// Time O(n^2)
+// Space O(n)
+var checkXMatrix = function (grid) {
+  let visited = new Set(),
+    leftValid = checkLeftDiag(grid, visited),
+    rightValid = checkRightDiag(grid, visited),
+    otherValid = true;
+
+  for (let row = 0; row < grid.length; row++) {
+    for (let col = 0; col < grid[0].length; col++) {
+      let pos = `${row},${col}`;
+      if (!visited.has(pos) && grid[row][col] !== 0) {
+        otherValid = false;
+        visited.add(pos);
+      } else {
+        continue;
+      }
+    }
+  }
+
+  return leftValid && rightValid && otherValid;
+};
+
+const checkLeftDiag = (grid, visited) => {
+  let temp = true;
+  for (let i = 0; i < grid.length; i++) {
+    if (grid[i][i] < 1) temp = false;
+    let pos = `${i},${i}`;
+    visited.add(pos);
+    if (visited.has(pos)) continue;
+  }
+
+  return temp;
+};
+
+const checkRightDiag = (grid, visited) => {
+  let temp = true;
+
+  for (let i = grid.length - 1; 0 <= i; i--) {
+    if (grid[grid.length - 1 - i][i] < 1) temp = false;
+    let pos = `${grid.length - 1 - i},${i}`;
+    visited.add(pos);
+    if (visited.has(pos)) continue;
+  }
+
+  return temp;
+};
+
+// ! LeetCode Solution
+const checkXMatrix = (grid) => {
+  for (let i = 0; i < grid.length; i += 1) {
+    for (let j = 0; j < grid.length; j += 1) {
+      const isDiagonal = i === j || i + j === grid.length - 1;
+
+      if (
+        (isDiagonal && grid[i][j] === 0) ||
+        (!isDiagonal && grid[i][j] !== 0)
+      ) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+};
+
