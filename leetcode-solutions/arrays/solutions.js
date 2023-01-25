@@ -1527,3 +1527,25 @@ var lastStoneWeight = function (stones) {
 
   return stones.length ? stones[0] : 0;
 };
+
+// * #2395. Find Subarrays With Equal Sum
+// Time O(n)
+// Space O(n)
+var findSubarrays = function (nums) {
+  let [subArrs, sumCount] = [[], {}];
+
+  for (let i = 1; i < nums.length; i++) {
+    subArrs.push([nums[i - 1], nums[i]]);
+  }
+
+  for (const subArr of subArrs) {
+    let sum = subArr.reduce((acc, val) => (acc += val));
+    sumCount[sum] = 1 + (sumCount[sum] || 0);
+  }
+
+  for (const [key, value] of Object.entries(sumCount)) {
+    if (value > 1) return true;
+  }
+
+  return false;
+};
