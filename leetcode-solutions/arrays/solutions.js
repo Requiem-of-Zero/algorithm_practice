@@ -1447,3 +1447,29 @@ var numberOfLines = function (widths, s) {
 
   return output;
 };
+
+// * #2164. Sort Even and Odd Indices Independently
+// Time O(n log n)
+// Space O(n)
+var sortEvenOdd = function (nums) {
+  const [evenNums, oddNums, output] = [[], [], []];
+  let [evenPointer, oddPointer] = [0, 1];
+
+  for (let i = 0; i < nums.length; i++) {
+    let num = nums[i];
+    if (i % 2 === 0) evenNums.push(num);
+    else oddNums.push(num);
+  }
+
+  evenNums.sort((a, b) => a - b);
+  oddNums.sort((a, b) => b - a);
+
+  for (let i = 0; i < evenNums.length; i++) {
+    if (evenNums[i]) output[evenPointer] = evenNums[i];
+    if (oddNums[i]) output[oddPointer] = oddNums[i];
+    evenPointer += 2;
+    oddPointer += 2;
+  }
+
+  return output;
+};
