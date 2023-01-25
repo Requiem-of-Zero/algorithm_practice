@@ -1549,3 +1549,22 @@ var findSubarrays = function (nums) {
 
   return false;
 };
+
+// * #2303. Calculate Amount Paid in Taxes
+// Time O(n)
+// Space O(1)
+var calculateTax = function (brackets, income) {
+  let paid = 0;
+  let prev = 0;
+
+  for (const [upper, percent] of brackets) {
+    const current = Math.min(income, upper - prev);
+    const tax = current * (percent / 100);
+
+    income -= current;
+    paid += tax;
+    prev = upper;
+
+    if (income <= 0) return paid;
+  }
+};
