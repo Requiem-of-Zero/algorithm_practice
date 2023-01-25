@@ -1473,3 +1473,38 @@ var sortEvenOdd = function (nums) {
 
   return output;
 };
+
+// * #1582. Special Positions in a Binary Matrix
+// Time O(m * n)
+// Space O(m * n)
+var numSpecial = function (mat) {
+  let specialSet = new Set(),
+    count = 0;
+
+  for (let row = 0; row < mat.length; row++) {
+    for (let col = 0; col < mat[0].length; col++) {
+      if (mat[row][col] === 1) specialSet.add(`${row},${col}`);
+    }
+  }
+
+  for (const pos of specialSet) {
+    if (checkPos(mat, pos)) count++;
+  }
+
+  return count;
+};
+
+const checkPos = (mat, pos) => {
+  const [rowIdx, colIdx] = pos.split(",");
+  let rowSet = new Set(),
+    colSet = new Set();
+  for (let row = 0; row < mat.length; row++) {
+    for (let col = 0; col < mat[0].length; col++) {
+      if (row === +rowIdx && +colIdx !== col) rowSet.add(mat[row][col]);
+      if (col === +colIdx && +rowIdx !== row) colSet.add(mat[row][col]);
+    }
+  }
+
+  if (rowSet.size === 1 && colSet.size === 1) return true;
+  else return false;
+};
