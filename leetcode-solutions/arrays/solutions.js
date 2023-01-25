@@ -1508,3 +1508,22 @@ const checkPos = (mat, pos) => {
   if (rowSet.size === 1 && colSet.size === 1) return true;
   else return false;
 };
+
+// * #1046. Last Stone Weight
+// Time O(n log n)
+// Space O(1)
+var lastStoneWeight = function (stones) {
+  let [x, y] = [1, 0];
+
+  while (stones.length > 1) {
+    stones.sort((a, b) => b - a);
+    if (stones[x] === stones[y]) {
+      stones.splice(y, 2);
+    } else {
+      stones.push(Math.abs(stones[y] - stones[x]));
+      stones.splice(y, 2);
+    }
+  }
+
+  return stones.length ? stones[0] : 0;
+};
