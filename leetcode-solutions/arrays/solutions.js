@@ -1692,3 +1692,29 @@ var average = function (salary) {
     filtered.reduce((acc, val) => (acc += val)) / filtered.length.toFixed(5)
   );
 };
+
+// * #1652. Defuse the Bomb
+// Time O(n)
+// Space O(n)
+var decrypt = function (code, k) {
+  if (k === 0) return new Array(code.length).fill(0);
+  let [start, end, sum] = [1, k, 0];
+  let output = [];
+  if (k < 0) {
+    k = -k;
+    start = code.length - k;
+    end = code.length - 1;
+  }
+
+  for (let i = start; i <= end; i++) {
+    sum += code[i];
+  }
+
+  for (let i = 0; i < code.length; i++) {
+    output[i] = sum;
+    sum -= code[start++ % code.length];
+    sum += code[++end % code.length];
+  }
+
+  return output;
+};
