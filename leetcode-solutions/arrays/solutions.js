@@ -1675,3 +1675,20 @@ var timeRequiredToBuy = function (tickets, k) {
   }
   return time;
 };
+
+// * #1491. Average Salary Excluding the Minimum and Maximum Salary
+// Time O(n)
+// Space O(n)
+var average = function (salary) {
+  let [min, max] = [Math.min(...salary), Math.max(...salary)];
+  const filtered = [];
+
+  for (const amount of salary) {
+    if (amount === min || amount === max) continue;
+    filtered.push(amount);
+  }
+
+  return (
+    filtered.reduce((acc, val) => (acc += val)) / filtered.length.toFixed(5)
+  );
+};
