@@ -1718,3 +1718,25 @@ var decrypt = function (code, k) {
 
   return output;
 };
+
+// * #2144. Minimum Cost of Buying Candies With Discount
+// Time O(n log n)
+// Space O(n)
+var minimumCost = function (cost) {
+  let [sorted, minPrice] = [[...cost].sort((a, b) => b - a), 0];
+  let free = false,
+    boughtCount = 0;
+
+  for (let i = 0; i < sorted.length; i++) {
+    if (boughtCount === 2) free = true;
+    if (free) {
+      boughtCount = 0;
+      free = false;
+      continue;
+    }
+    minPrice += sorted[i];
+    boughtCount++;
+  }
+
+  return minPrice;
+};
