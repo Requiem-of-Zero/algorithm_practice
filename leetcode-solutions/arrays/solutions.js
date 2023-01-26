@@ -1568,3 +1568,21 @@ var calculateTax = function (brackets, income) {
     if (income <= 0) return paid;
   }
 };
+
+// * #1408. String Matching in an Array
+// Time O(n^2)
+// Space O(n)
+var stringMatching = function (words) {
+  let output = [];
+
+  for (let i = 0; i < words.length; i++) {
+    for (let j = 0; j < words.length; j++) {
+      if (i !== j && words[j].indexOf(words[i]) !== -1) {
+        output.push(words[i]);
+        break;
+      }
+    }
+  }
+
+  return output;
+};
