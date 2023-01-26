@@ -1603,3 +1603,22 @@ var transpose = function (matrix) {
 
   return output;
 };
+
+// * #1550. Three Consecutive Odds
+// Time O(n)
+// Space O(1)
+var threeConsecutiveOdds = function (arr) {
+  let oddCount = 0;
+
+  for (const num of arr) {
+    if (num % 2 !== 0) {
+      oddCount++;
+    } else {
+      oddCount = 0;
+    }
+
+    if (oddCount === 3) return true;
+  }
+
+  return false;
+};
