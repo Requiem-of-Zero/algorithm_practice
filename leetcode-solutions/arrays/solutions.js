@@ -1586,3 +1586,20 @@ var stringMatching = function (words) {
 
   return output;
 };
+
+// * #867. Transpose Matrix
+// Time O(n * m)
+// Space O(n * m)
+var transpose = function (matrix) {
+  let output = new Array(matrix[0].length)
+    .fill(null)
+    .map((item) => new Array(matrix.length).fill(null));
+
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = 0; col < matrix[0].length; col++) {
+      output[col][row] = matrix[row][col];
+    }
+  }
+
+  return output;
+};
