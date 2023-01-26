@@ -1656,3 +1656,22 @@ var matrixReshape = function (mat, r, c) {
 
   return output;
 };
+
+// * #2073. Time Needed to Buy Tickets
+// Time O(n ^ 2)
+// Space O(1)
+var timeRequiredToBuy = function (tickets, k) {
+  let time = 0;
+
+  while (tickets[k] !== 0) {
+    for (let i = 0; i < tickets.length; i++) {
+      if (tickets[k] === 0) return time;
+
+      if (tickets[i] !== 0) {
+        tickets[i] -= 1;
+        time++;
+      }
+    }
+  }
+  return time;
+};
