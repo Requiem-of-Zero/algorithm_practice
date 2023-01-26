@@ -1622,3 +1622,22 @@ var threeConsecutiveOdds = function (arr) {
 
   return false;
 };
+
+// * #1800. Maximum Ascending Subarray Sum
+// Time O(n)
+// Space O(1)
+var maxAscendingSum = function (nums) {
+  let res = nums[0],
+    temp = nums[0];
+
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] > nums[i - 1]) {
+      temp += nums[i];
+    } else {
+      temp = nums[i];
+    }
+    res = Math.max(res, temp);
+  }
+
+  return res;
+};
