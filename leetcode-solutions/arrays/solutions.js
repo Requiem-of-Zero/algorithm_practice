@@ -1641,3 +1641,18 @@ var maxAscendingSum = function (nums) {
 
   return res;
 };
+
+// * #566. Reshape the Matrix
+// Time O(n * m)
+// Space O(n * m)
+var matrixReshape = function (mat, r, c) {
+  let arr = mat.flat();
+
+  if (r * c !== arr.length) return mat;
+
+  let output = [];
+
+  while (arr.length) output.push(arr.splice(0, c));
+
+  return output;
+};
