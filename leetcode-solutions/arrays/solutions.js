@@ -1788,3 +1788,18 @@ var bestHand = function (ranks, suits) {
 
   return hands[bestHand];
 };
+
+// * #119. Pascal's Triangle II
+// Time O(n)
+// Space O(n)
+var getRow = function (rowIndex) {
+  if (rowIndex === 0) return [1];
+  if (rowIndex === 1) return [1, 1];
+  let current = [1];
+  let prev = getRow(rowIndex - 1);
+  for (let i = 1; i < rowIndex; i++) {
+    current.push(prev[i - 1] + prev[i]);
+  }
+  current.push(1);
+  return current;
+};
