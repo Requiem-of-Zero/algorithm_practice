@@ -1740,3 +1740,51 @@ var minimumCost = function (cost) {
 
   return minPrice;
 };
+
+// * #888. Fair Candy Swap
+// Time O(n)
+// Space O(1)
+var fairCandySwap = function (aliceSizes, bobSizes) {
+  let aliceSum = aliceSizes.reduce((acc, val) => (acc += val)),
+    bobSum = bobSizes.reduce((acc, val) => (acc += val));
+
+  const swap = (arr1, arr2, diff) => {
+    const hash = new Map();
+    for (let i = 0; i < arr1.length; i++) {
+      // Set key as element, value as the index
+      hash.set(arr1[i], i);
+    }
+    for (let i = 0; i < arr2.length; i++) {
+      if (hash.has(arr2[i] + diff / 2)) return [arr2[i] + diff / 2, arr2[i]];
+    }
+  };
+
+  return swap(aliceSizes, bobSizes, aliceSum - bobSum);
+};
+
+// * #2347. Best Poker Hand
+// Time O(n)
+// Space O(n)
+var bestHand = function (ranks, suits) {
+  let [bestHand, rankCount, suitsSet] = [1, {}, new Set(suits)];
+
+  const hands = {
+    1: "High Card",
+    2: "Pair",
+    3: "Three of a Kind",
+  };
+
+  if (suitsSet.size === 1) return "Flush";
+
+  ranks.forEach((rank) => (rankCount[rank] = 1 + (rankCount[rank] || 0)));
+
+  for (const [key, val] of Object.entries(rankCount)) {
+    if (val > bestHand && val === 2) {
+      bestHand = 2;
+    } else if (val > bestHand && val >= 3) {
+      bestHand = 3;
+    }
+  }
+
+  return hands[bestHand];
+};
