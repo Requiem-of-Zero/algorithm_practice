@@ -1959,3 +1959,19 @@ var arrayRankTransform = function (arr) {
   return output;
 };
 
+// * #2455. Average Value of Even Numbers That Are Divisible by Three
+// Time O(n)
+// Space O(n)
+var averageValue = function (nums) {
+  const divisible = [];
+
+  for (const num of nums) {
+    if (num % 2 === 0 && num % 3 === 0) divisible.push(num);
+  }
+
+  return divisible.length
+    ? Math.floor(
+        divisible.reduce((acc, val) => (acc += val)) / divisible.length
+      )
+    : 0;
+};
