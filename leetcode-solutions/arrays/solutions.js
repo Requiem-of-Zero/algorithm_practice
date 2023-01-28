@@ -1820,3 +1820,31 @@ var countElements = function (nums) {
   return output;
 };
 
+// * #506. Relative Ranks
+// Time O(n log n)
+// Space O(n)
+var findRelativeRanks = function (score) {
+  const [sortedScores, rankings, output] = [
+    [...score].sort((a, b) => b - a),
+    {},
+    [],
+  ];
+
+  for (let i = 0; i < sortedScores.length; i++) {
+    if (i === 0) {
+      rankings[sortedScores[i]] = "Gold Medal";
+    } else if (i === 1) {
+      rankings[sortedScores[i]] = "Silver Medal";
+    } else if (i === 2) {
+      rankings[sortedScores[i]] = "Bronze Medal";
+    } else {
+      rankings[sortedScores[i]] = `${i + 1}`;
+    }
+  }
+
+  for (const currScore of score) {
+    output.push(rankings[currScore]);
+  }
+
+  return output;
+};
