@@ -1990,3 +1990,19 @@ var construct2DArray = function (original, m, n) {
   return result;
 };
 
+// * #2465. Number of Distinct Averages
+// Time O(n ^ 2)
+// Space O(n)
+var distinctAverages = function (nums) {
+  let averagesSet = new Set();
+  nums.sort((a, b) => a - b);
+  let [left, right] = [0, nums.length - 1];
+
+  while (nums.length) {
+    let [min, max] = [nums.splice(left, 1), nums.splice((right -= 1), 1)];
+    averagesSet.add((min[0] + max[0]) / 2);
+    right--;
+  }
+
+  return averagesSet.size;
+};
