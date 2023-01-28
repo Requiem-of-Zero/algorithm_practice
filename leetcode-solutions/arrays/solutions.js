@@ -1803,3 +1803,20 @@ var getRow = function (rowIndex) {
   current.push(1);
   return current;
 };
+
+// * #2148. Count Elements With Strictly Smaller and Greater Elements 
+// Time O(n ^ 2)
+// Space O(1)
+var countElements = function (nums) {
+  let output = 0;
+  for (let i = 0; i < nums.length; i++) {
+    let [smallerCount, greaterCount] = [0, 0];
+    for (let j = 0; j < nums.length; j++) {
+      if (i != j && nums[i] < nums[j]) smallerCount++;
+      if (i != j && nums[i] > nums[j]) greaterCount++;
+    }
+    if (smallerCount >= 1 && greaterCount >= 1) output++;
+  }
+  return output;
+};
+
