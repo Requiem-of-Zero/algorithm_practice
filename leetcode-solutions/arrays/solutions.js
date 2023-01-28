@@ -1904,3 +1904,35 @@ var slowestKey = function (releaseTimes, keysPressed) {
 
   return durationToKeyPress[duration][durationToKeyPress[duration].length - 1];
 };
+
+// * #748. Shortest Completing Word
+// Time O(n * m)
+// Space O(n)
+var shortestCompletingWord = function (licensePlate, words) {
+  let output = [];
+
+  const createLetterCount = (word) => {
+    let hash = {};
+
+    for (const char of word) {
+      if (char.match(/[a-zA-Z]/)) {
+        hash[char.toLowerCase()] = 1 + (hash[char.toLowerCase()] || 0);
+      }
+    }
+
+    return hash;
+  };
+
+  for (const word of words) {
+    let letterCount = createLetterCount(licensePlate);
+    for (const char of word) {
+      if (letterCount[char]) letterCount[char]--;
+    }
+    let values = new Set(Object.values(letterCount));
+    if (values.size === 1 && values.has(0)) output.push(word);
+  }
+
+  output.sort((a, b) => a.length - b.length);
+
+  return output[0];
+};
