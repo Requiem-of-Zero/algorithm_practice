@@ -1936,3 +1936,26 @@ var shortestCompletingWord = function (licensePlate, words) {
 
   return output[0];
 };
+
+// * #1331. Rank Transform of an Array
+// Time O(n log n)
+// Space O(n)
+var arrayRankTransform = function (arr) {
+  const [sorted, rankings, output] = [[...arr].sort((a, b) => a - b), {}, []];
+  let rankCount = 1;
+
+  for (let i = 0; i < sorted.length; i++) {
+    let num = sorted[i];
+    if (!rankings[num]) {
+      rankings[num] = rankCount;
+      rankCount++;
+    } else {
+      continue;
+    }
+  }
+
+  arr.forEach((num) => output.push(rankings[num]));
+
+  return output;
+};
+
