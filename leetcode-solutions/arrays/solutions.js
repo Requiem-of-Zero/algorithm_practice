@@ -1881,3 +1881,26 @@ var findSpecialInteger = function (arr) {
   }
 };
 
+// * #1629. Slowest Key
+// Time O(n log n)
+// Space O(n)
+var slowestKey = function (releaseTimes, keysPressed) {
+  let duration = releaseTimes[0];
+  const durationToKeyPress = {
+    [releaseTimes[0]]: [keysPressed[0]],
+  };
+
+  for (let i = 1; i < releaseTimes.length; i++) {
+    let currDuration = releaseTimes[i] - releaseTimes[i - 1];
+    if (durationToKeyPress[currDuration] === undefined) {
+      durationToKeyPress[currDuration] = [keysPressed[i]];
+    } else {
+      durationToKeyPress[currDuration].push(keysPressed[i]);
+    }
+    duration = Math.max(duration, currDuration);
+  }
+
+  durationToKeyPress[duration].sort();
+
+  return durationToKeyPress[duration][durationToKeyPress[duration].length - 1];
+};
