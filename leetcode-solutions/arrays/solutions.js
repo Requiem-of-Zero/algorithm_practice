@@ -1867,3 +1867,17 @@ var countQuadruplets = function (nums) {
 
   return count;
 };
+
+// * #1287. Element Appearing More Than 25% In Sorted Array
+// Time O(n)
+// Space O(n)
+var findSpecialInteger = function (arr) {
+  const [quarter, occurance] = [arr.length / 4, {}];
+
+  arr.forEach((num) => (occurance[num] = 1 + (occurance[num] || 0)));
+
+  for (const [num, count] of Object.entries(occurance)) {
+    if (count > quarter) return num;
+  }
+};
+
