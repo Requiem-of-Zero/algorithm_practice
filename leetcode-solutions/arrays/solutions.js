@@ -2007,3 +2007,27 @@ var distinctAverages = function (nums) {
   return averagesSet.size;
 };
 
+// * #2210. Count Hills and Valleys in an Array
+// Time O(n)
+// Space O(n)
+var countHillValley = function (nums) {
+  let n = nums.length;
+
+  let nums_nodups = []; // no duplicates
+  for (let i = 0; i < n; i++)
+    if (nums[i] != nums[i - 1]) {
+      nums_nodups.push(nums[i]);
+    }
+  nums = nums_nodups;
+  n = nums.length;
+  let count = 0;
+  for (let i = 1; i < n - 1; i++) {
+    if (nums[i - 1] < nums[i] && nums[i] > nums[i + 1]) {
+      count++; // hill
+    }
+    if (nums[i - 1] > nums[i] && nums[i] < nums[i + 1]) {
+      count++; // valley
+    }
+  }
+  return count;
+};
