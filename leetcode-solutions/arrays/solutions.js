@@ -2031,3 +2031,36 @@ var countHillValley = function (nums) {
   }
   return count;
 };
+
+// * #2273. Find Resultant Array After Removing Anagrams
+// Time O(n ^ 2)
+// Space O(n)
+var removeAnagrams = function (words) {
+  const isAnagram = (str1, str2) => {
+    let [count1, count2] = [{}, {}];
+
+    str1.split("").forEach((char) => (count1[char] = 1 + (count1[char] || 0)));
+    str2.split("").forEach((char) => (count2[char] = 1 + (count2[char] || 0)));
+
+    for (const [key, val] of Object.entries(count1)) {
+      if (count2[key] !== val) return false;
+    }
+
+    for (const [key, val] of Object.entries(count2)) {
+      if (count1[key] !== val) return false;
+    }
+
+    return true;
+  };
+
+  for (let i = words.length - 1; 1 <= i; i--) {
+    let first = words[i],
+      adj = words[i - 1];
+
+    if (isAnagram(first, adj)) {
+      words.splice(i, 1);
+    }
+  }
+
+  return words;
+};
