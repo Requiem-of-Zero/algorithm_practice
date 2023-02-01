@@ -40,3 +40,22 @@ var countAsterisks = function (s) {
 
   return asteriskCount;
 };
+
+// * #557. Reverse Words in a String III
+// Time O(n^2)
+// Space O(1)
+var reverseWords = function (s) {
+  const reverseSingleWord = (word) => {
+    let reversed = "";
+
+    for (let i = word.length - 1; 0 <= i; i--) {
+      reversed += word[i];
+    }
+
+    return reversed;
+  };
+  return s
+    .split(" ")
+    .map((word) => reverseSingleWord(word))
+    .join(" ");
+};
