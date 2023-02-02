@@ -59,3 +59,23 @@ var reverseWords = function (s) {
     .map((word) => reverseSingleWord(word))
     .join(" ");
 };
+
+// * #2103. Rings and Rods
+// Time O(n)
+// Space O(n)
+var countPoints = function (rings) {
+  let [count, colorHash] = [0, {}];
+
+  for (let i = 0; i < rings.length - 1; i += 2) {
+    let [color, ringPos] = [rings[i], rings[i + 1]];
+
+    if (!colorHash[ringPos]) colorHash[ringPos] = new Set(color);
+    else colorHash[ringPos].add(color);
+  }
+
+  for (const [key, val] of Object.entries(colorHash)) {
+    if (val.size === 3) count++;
+  }
+
+  return count;
+};
