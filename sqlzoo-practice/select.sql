@@ -153,5 +153,56 @@ SELECT
 FROM
   world
 
-    -- **
+    -- * SELECT the name FROM the world table WHERE the population is at least 200 mill
+SELECT
+  name
+FROM
+  world
+WHERE
+  population >= 200000000
 
+  -- * SELECT the name and per capita GDP FROM the world table WHERE the population is at least 200 mill
+SELECT
+  name,
+  gdp / population
+FROM
+  world
+WHERE
+  population >= 200000000
+
+  -- * SELECT the name and population in 1000000 (millions) FROM world WHERE continent is 'South America'
+SELECT
+  name,
+  population / 1000000
+FROM
+  world
+WHERE
+  continent = 'South America'
+
+  -- * SELECT the name and population FROM the world table WHERE the name is either France Germany or Italy
+SELECT
+  name,
+  population
+FROM
+  world
+WHERE
+  name IN ('France', 'Germany', 'Italy');
+
+  -- * SELECT the name FROM the world table WHERE the name contains 'United'
+SELECT
+  name
+FROM
+  world
+WHERE
+  name LIKE '%United%';
+
+-- * SELECT the name population and area FROM the world table WHERE the area is at least 3 million OR population is at least 250 million
+SELECT
+  name,
+  population,
+  area
+FROM
+  world
+WHERE
+  area >= 3000000
+  OR population >= 250000000;
