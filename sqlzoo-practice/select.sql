@@ -196,7 +196,7 @@ FROM
 WHERE
   name LIKE '%United%';
 
--- * SELECT the name population and area FROM the world table WHERE the area is at least 3 million OR population is at least 250 million
+  -- * SELECT the name population and area FROM the world table WHERE the area is at least 3 million OR population is at least 250 million
 SELECT
   name,
   population,
@@ -206,3 +206,71 @@ FROM
 WHERE
   area >= 3000000
   OR population >= 250000000;
+
+  -- * SELECT the name, population, area FROM the world table WHERE the area is greater than 3 mill or population greate than 250 mill and not both
+SELECT
+  name,
+  population,
+  area
+FROM
+  world
+WHERE
+  (
+    area > 3000000
+    OR population > 250000000
+  )
+  AND NOT (
+    area > 3000000
+    AND population > 250000000
+  );
+
+  -- * SELECT the name, population in millions rounded to 2 decimal places, and gdp in billions rounded to 2 decimal places FROM the world table WHERE continent is 'North America'
+SELECT
+  name,
+  ROUND(population / 1000000, 2),
+  ROUND(gdp / 1000000000, 2)
+FROM
+  world
+WHERE
+  continent = 'South America'
+
+  -- * SELECT the name and per capita GDP rounded to nearest 1000th (3 zeros -3) FROM the world table WHERE the gdp is greater than one trillion (12 zeroes)
+SELECT
+  name,
+  ROUND(gdp / population, -3)
+FROM
+  world
+WHERE
+  gdp > 1000000000000
+
+  -- * SELECT the name and capital FROM the world table WHERE name and capital have the same number of characters
+SELECT
+  name,
+  capital
+FROM
+  world
+WHERE
+  LEN(name) = LEN(capital);
+
+  -- * SELECT the name and capital FROM the world table WHERE name does not equal capital AND the first char of name is equal to the first char of capital
+SELECT
+  name,
+  capital
+FROM
+  world
+WHERE
+  name <> capital
+  AND LEFT(name, 1) = LEFT(capital, 1);
+
+  -- * SELECT the name FROM world WHERE the name has every vowel in the name and no spaces
+SELECT
+  name
+FROM
+  world
+WHERE
+  name LIKE '%a%'
+  AND name LIKE '%e%'
+  AND name LIKE '%i%'
+  AND name LIKE '%o%'
+  AND name LIKE '%u%'
+  AND name NOT LIKE '% %';
