@@ -445,4 +445,175 @@ WHERE
       name = 'United Kingdom'
   )
 
-  
+  -- * SELECT the name and continent FROM the world table WHERE the continent has 'Argentina' or 'Australia' ORDER BY the name
+SELECT
+  name,
+  continent
+FROM
+  world
+WHERE
+  continent IN (
+    SELECT
+      continent
+    FROM
+      world
+    WHERE
+      name IN ('Argentina', 'Australia')
+  )
+ORDER BY
+  name;
+
+  -- * SELECT the name and population FROM the world table WHERE the population is greater than 'United Kingdom' and less than 'Germany'
+SELECT
+  name,
+  population
+FROM
+  world
+WHERE
+  population > (
+    SELECT
+      population
+    FROM
+      world
+    WHERE
+      name = 'United Kingdom'
+  )
+  AND population < (
+    SELECT
+      population
+    FROM
+      world
+    WHERE
+      name = 'Germany'
+  );
+
+  -- * SELECT the name and population in percentage of population of Germany FROM world table WHERE continent is 'Europe'
+SELECT
+  name,
+  CONCAT(
+    ROUND(
+      100 * population /(
+        SELECT
+          population
+        FROM
+          world
+        WHERE
+          name = 'Germany'
+      ),
+      0
+    ),
+    '%'
+  )
+FROM
+  world
+WHERE
+  continent = 'Europe';
+
+  -- * SELECT the name FROM world WHERE the gdp is greater than all the European GDPs 
+SELECT
+  name
+FROM
+  world
+WHERE
+  gdp > ALL(
+    SELECT
+      gdp
+    FROM
+      world
+    WHERE
+      continent = 'Europe'
+      AND gdp > 0
+  )
+
+  -- * Find the largest country (by area) in each continent, show the continent, the name and the area:
+SELECT
+  continent,
+  name,
+  area
+FROM
+  world x
+WHERE
+  area >= ALL(
+    SELECT
+      area
+    FROM
+      world y
+    WHERE
+      x.continent = y.continent
+      AND y.area > 0
+  );
+  -- Alternative query with built in SQL max 
+SELECT
+  continent,
+  name,
+  area
+FROM
+  world
+WHERE
+  area IN (
+    SELECT
+      max(area)
+    FROM
+      world
+    GROUP BY
+      continent
+  )
+
+  -- * First country of each continent (alphabetically)
+SELECT
+  continent,
+  name
+FROM
+  world x
+WHERE
+  name <= ALL(
+    SELECT
+      name
+    FROM
+      world y
+    WHERE
+      x.continent = y.continent
+  )
+
+  -- * Find the continents where all countries have a population <= 25000000.Then find the names of the countries associated with these continents. Show name, continent and population.
+SELECT
+  name,
+  continent,
+  population
+FROM
+  world
+WHERE
+  continent IN (
+    SELECT
+      continent
+    FROM
+      world x
+    WHERE
+      25000000 >= (
+        SELECT
+          MAX(population)
+        FROM
+          world y
+        WHERE
+          x.continent = y.continent
+      )
+  )
+
+  -- * Some countries have populations more than three times that of all of their neighbours (in the same continent).Give the countries and continents.
+SELECT
+  name,
+  continent
+FROM
+  world x
+WHERE
+  population > ALL(
+    SELECT
+      3 * population
+    FROM
+      world y
+    WHERE
+      x.continent = y.continent
+      AND x.name <> y.name
+  );
+
+-- ! SUM and COUNT
