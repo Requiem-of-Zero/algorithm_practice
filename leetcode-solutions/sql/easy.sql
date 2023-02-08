@@ -157,3 +157,19 @@ from
   products
 where
   store3 is not null
+
+-- * 1587.Bank Account Summary II
+-- https://leetcode.com/problems/bank-account-summary-ii/
+select
+  users.name name,
+  SUM(transactions.amount) balance
+from
+  transactions
+  join users on transactions.account = users.account
+group by
+  transactions.account
+having
+  SUM(transactions.amount) > 10000
+
+-- * 
+-- 
