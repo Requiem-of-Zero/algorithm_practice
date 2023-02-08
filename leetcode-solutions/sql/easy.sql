@@ -115,3 +115,45 @@ FROM
 GROUP BY
   event_day,
   emp_id
+
+-- * 1693. Daily Leads and Partners
+-- https://leetcode.com/problems/daily-leads-and-partners/
+SELECT
+  date_id,
+  make_name,
+  COUNT(DISTINCT lead_id) unique_leads,
+  COUNT(DISTINCT partner_id) unique_partners
+FROM
+  DailySales
+GROUP BY
+  date_id,
+  make_name
+
+-- * 1795.Rearrange Products Table
+-- https://leetcode.com/problems/rearrange-products-table/
+SELECT
+  product_id,
+  'store1' as store,
+  store1 as price
+FROM
+  Products
+WHERE
+  store1 IS NOT NULL
+union
+select
+  product_id,
+  'store2' as store,
+  store2 as price
+from
+  Products
+where
+  store2 is not null
+union
+select
+  product_id,
+  'store3' as store,
+  store3 as price
+from
+  products
+where
+  store3 is not null
