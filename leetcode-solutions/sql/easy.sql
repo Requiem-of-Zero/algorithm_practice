@@ -81,3 +81,27 @@ FROM
 WHERE
   p1.Email = p2.Email
   AND p1.Id > p2.Id
+
+-- * 197.Rising Temperature
+-- https://leetcode.com/problems/rising-temperature/
+SELECT
+  weather.id AS 'Id'
+FROM
+  weather
+  JOIN weather w ON DATEDIFF(weather.recordDate, w.recordDate) = 1
+  AND weather.Temperature > w.Temperature;
+
+-- * 586.Customer Placing the Largest Number of Orders
+-- https://leetcode.com/problems/customer-placing-the-largest-number-of-orders/
+SELECT
+  customer_number
+FROM
+  Orders
+GROUP BY
+  customer_number
+ORDER BY
+  COUNT(customer_number) DESC
+LIMIT
+  1
+
+-- * 
