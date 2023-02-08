@@ -55,4 +55,29 @@ FROM
   Person
   LEFT JOIN Address ON Address.personId = Person.personId;
 
--- *
+-- * 182.Duplicate Emails
+-- https://leetcode.com/problems/duplicate-emails/
+select
+  Email
+from
+  (
+    select
+      Email,
+      count(Email) as num
+    from
+      Person
+    group by
+      Email
+  ) as statistic
+where
+  num > 1;
+
+-- * 196.Delete Duplicate Emails
+-- https://leetcode.com/problems/delete-duplicate-emails/
+DELETE p1
+FROM
+  Person p1,
+  Person p2
+WHERE
+  p1.Email = p2.Email
+  AND p1.Id > p2.Id
