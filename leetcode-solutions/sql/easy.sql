@@ -334,3 +334,21 @@ group by
   class
 having
   count(class) >= 5
+
+-- * 607.Sales Person
+-- https://leetcode.com/problems/sales-person/
+select
+  s.name
+from
+  salesperson s
+where
+  s.name not in (
+    select
+      salesperson.name
+    from
+      salesperson
+      join orders on orders.sales_id = salesperson.sales_id
+      join company on company.com_id = orders.com_id
+    where
+      company.name = 'RED'
+  )
