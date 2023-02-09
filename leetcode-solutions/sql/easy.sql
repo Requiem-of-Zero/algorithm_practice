@@ -301,7 +301,7 @@ group by
 order by
   user_id asc
 
--- * 
+-- * 1050. Actors and Directors Who Cooperated At Least Three Times
 -- https://leetcode.com/problems/actors-and-directors-who-cooperated-at-least-three-times/
 select
   actor_id,
@@ -313,3 +313,13 @@ group by
   director_id
 having
   count(timestamp) >= 3
+
+-- * 181.Employees Earning More Than Their Managers
+-- https://leetcode.com/problems/employees-earning-more-than-their-managers/
+SELECT
+  a.name Employee
+FROM
+  Employee a
+  JOIN Employee b ON a.managerId = b.id
+where
+  a.salary > b.salary
