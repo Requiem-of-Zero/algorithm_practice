@@ -215,3 +215,31 @@ FROM
   Department
 GROUP BY
   id;
+
+-- * 1484.Group Sold Products By The Date
+-- https://leetcode.com/problems/group-sold-products-by-the-date/
+SELECT
+  sell_date,
+  COUNT(DISTINCT product) AS num_sold,
+  GROUP_CONCAT(
+    DISTINCT product
+    ORDER BY
+      product ASC
+  ) AS products
+FROM
+  Activities
+GROUP BY
+  sell_date
+
+-- * 1890.The Latest Login in 2020
+-- https://leetcode.com/problems/the-latest-login-in-2020/
+select
+  user_id,
+  max(time_stamp) last_stamp
+from
+  logins
+where
+  date_format(time_stamp, '%Y') = 2020
+group by
+  user_id
+
