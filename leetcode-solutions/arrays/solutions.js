@@ -2076,3 +2076,31 @@ var findPoisonedDuration = function (timeSeries, duration) {
   }
   return res;
 };
+
+// * 1189. Maximum Number of Balloons
+// ! Tesla problem
+// Time O(n)
+// Space O(n)
+var maxNumberOfBalloons = function (text) {
+  const count = new Map();
+  const balloonCount = new Map();
+
+  text.split("").forEach((char) => count.set(char, (count.get(char) || 0) + 1));
+  "balloon"
+    .split("")
+    .forEach((char) =>
+      balloonCount.set(char, (balloonCount.get(char) || 0) + 1)
+    );
+
+  let output = Infinity;
+
+  for (const char of balloonCount.keys()) {
+    if (!count.has(char)) return 0;
+    output = Math.min(
+      output,
+      Math.floor(count.get(char) / balloonCount.get(char))
+    );
+  }
+
+  return output;
+};
