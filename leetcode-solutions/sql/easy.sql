@@ -277,3 +277,14 @@ from
   activity
 group by
   player_id
+
+-- * 1148.Article Views I
+-- https://leetcode.com/problems/article-views-i/
+select
+  DISTINCT author_id id
+from
+  views
+where
+  author_id = viewer_id
+order by
+  id asc
