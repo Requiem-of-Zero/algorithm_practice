@@ -288,3 +288,15 @@ where
   author_id = viewer_id
 order by
   id asc
+
+-- * 1729.Find Followers Count
+-- https://leetcode.com/problems/find-followers-count/
+select
+  user_id,
+  count(follower_id) followers_count
+from
+  followers
+group by
+  user_id
+order by
+  user_id asc
