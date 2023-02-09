@@ -392,4 +392,16 @@ from
 order by
   user_id
 
--- * 
+-- * 1407.Top Travellers
+-- https://leetcode.com/problems/top-travellers/
+select
+  users.name name,
+  coalesce(sum(rides.distance), 0) travelled_distance
+from
+  users
+  left join rides on users.id = rides.user_id
+group by
+  rides.user_id
+order by
+  travelled_distance desc,
+  name asc
