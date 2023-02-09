@@ -428,3 +428,15 @@ where
   and activity_date <= cast('2019-07-27' as date)
 group by
   activity_date
+
+-- * 1527.Patients With a Condition
+-- https://leetcode.com/problems/patients-with-a-condition/
+select
+  *
+from
+  patients
+where
+  conditions like '% DIAB1%'
+  or conditions like 'DIAB1%'
+
+-- * 
