@@ -268,3 +268,12 @@ from
 order by
   employee_id asc
 
+-- * 511.Game Play Analysis I
+-- https://leetcode.com/problems/game-play-analysis-i/
+select
+  player_id,
+  min(event_date) first_login
+from
+  activity
+group by
+  player_id
