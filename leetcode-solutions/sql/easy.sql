@@ -243,3 +243,28 @@ where
 group by
   user_id
 
+-- * 1965.Employees With Missing Information
+-- https://leetcode.com/problems/employees-with-missing-information/
+select
+  employee_id
+from
+  (
+    SELECT
+      e1.employee_id
+    FROM
+      employees e1
+      LEFT JOIN salaries s1 ON e1.employee_id = s1.employee_id
+    where
+      s1.employee_id is null
+    UNION
+    SELECT
+      s2.employee_id
+    FROM
+      employees e2
+      RIGHT JOIN salaries s2 ON e2.employee_id = s2.employee_id
+    where
+      e2.employee_id is null
+  ) as full_joined
+order by
+  employee_id asc
+
