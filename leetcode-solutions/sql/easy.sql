@@ -378,3 +378,18 @@ group by
 having
   min(sales.sale_date) >= cast('2019-01-01' as date)
   and max(sales.sale_date) <= cast('2019-03-31' as date)
+
+-- * 1667.Fix Names in a Table
+-- https://leetcode.com/problems/fix-names-in-a-table/
+select
+  user_id,
+  concat(
+    UPPER(LEFT(name, 1)),
+    LOWER(SUBSTRING(name, 2, length(name)))
+  ) name
+from
+  users
+order by
+  user_id
+
+-- * 
