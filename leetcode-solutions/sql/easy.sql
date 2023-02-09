@@ -364,3 +364,17 @@ where
   and description <> 'boring'
 order by
   rating desc
+
+-- * 1084.Sales Analysis III
+-- https://leetcode.com/problems/sales-analysis-iii/
+select
+  product.product_id,
+  product.product_name
+from
+  product
+  join sales on sales.product_id = product.product_id
+group by
+  sales.product_id
+having
+  min(sales.sale_date) >= cast('2019-01-01' as date)
+  and max(sales.sale_date) <= cast('2019-03-31' as date)
