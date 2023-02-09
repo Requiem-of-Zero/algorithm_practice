@@ -438,16 +438,3 @@ from
 where
   conditions like '% DIAB1%'
   or conditions like 'DIAB1%'
-
--- * 1667.Fix Names in a Table
--- https://leetcode.com/problems/fix-names-in-a-table/
-select
-  user_id,
-  concat(
-    UPPER(LEFT(name, 1)),
-    LOWER(SUBSTRING(name, 2, length(name)))
-  ) name
-from
-  users
-order by
-  user_id
