@@ -229,3 +229,27 @@ var areNumbersAscending = function (s) {
 
   return true;
 };
+
+// * #884. Uncommon Words from Two Sentences
+// Time O(n)
+// Space O(n)
+var uncommonFromSentences = function (s1, s2) {
+  const [output, wordCount1, wordCount2] = [[], {}, {}];
+
+  s1.split(" ").forEach(
+    (char) => (wordCount1[char] = 1 + (wordCount1[char] || 0))
+  );
+  s2.split(" ").forEach(
+    (char) => (wordCount2[char] = 1 + (wordCount2[char] || 0))
+  );
+
+  for (const [key, val] of Object.entries(wordCount1)) {
+    if (val === 1 && !wordCount2[key]) output.push(key);
+  }
+
+  for (const [key, val] of Object.entries(wordCount2)) {
+    if (val === 1 && !wordCount1[key]) output.push(key);
+  }
+
+  return output;
+};
