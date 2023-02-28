@@ -336,3 +336,25 @@ var isPrefixOfWord = function (sentence, searchWord) {
   }
   return -1;
 };
+
+// * #1544. Make The String Great
+// Time O(n)
+// Space O(n)
+var makeGood = function (s) {
+  let stack = [];
+
+  for (let i = 0; i < s.length; i++) {
+    let current = s[i],
+      previous = stack[stack.length - 1];
+    if (
+      stack.length &&
+      Math.abs(current.charCodeAt() - previous.charCodeAt()) === 32
+    ) {
+      stack.pop();
+    } else {
+      stack.push(s[i]);
+    }
+  }
+
+  return stack.join("");
+};
