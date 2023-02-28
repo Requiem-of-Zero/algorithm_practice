@@ -81,7 +81,7 @@ var countPoints = function (rings) {
 };
 
 // * #1967. Number of Strings That Appear as Substrings in Word
-// Time O(n ^ 2)
+// Time O(n * m)
 // Space O(1)
 var numOfStrings = function (patterns, word) {
   let count = 0;
@@ -93,3 +93,33 @@ var numOfStrings = function (patterns, word) {
   return count;
 };
 
+// * #2000. Reverse Prefix of Word
+// Time O(n)
+// Space O(n)
+var reversePrefix = function (word, ch) {
+  const reverse = (word, left, right) => {
+    let [reverseSlice, rest] = [
+      word.slice(left, right + 1),
+      word.slice(right + 1),
+    ];
+    reverseSlice = reverseSlice.split("").reverse().join("");
+    return reverseSlice + rest;
+  };
+
+  let firstOccurance = word.indexOf(ch);
+  return reverse(word, 0, firstOccurance);
+};
+
+// * #1812. Determine Color of a Chessboard Square
+// Time O(1)
+// Space O(1)
+var squareIsWhite = function (coordinates) {
+  let letters = ["a", "b", "c", "d", "e", "f", "g", "h"];
+  let [letter, num] = coordinates.split("");
+  if (
+    (letters.indexOf(letter) % 2 == 0 && num % 2 == 0) ||
+    (letters.indexOf(letter) % 2 == 1 && num % 2 == 1)
+  )
+    return true;
+  return false;
+};
