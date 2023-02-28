@@ -211,3 +211,21 @@ var greatestLetter = function (s) {
   }
   return "";
 };
+
+// * #2042. Check if Numbers Are Ascending in a Sentence
+// Time O(n)
+// Space O(n)
+var areNumbersAscending = function (s) {
+  let numbers = s
+    .split(" ")
+    .filter((val) => val.match(/[0-9]/))
+    .map((val) => +val);
+
+  for (let i = 1; i < numbers.length; i++) {
+    if (numbers[i] <= numbers[i - 1]) {
+      return false;
+    }
+  }
+
+  return true;
+};
