@@ -79,3 +79,17 @@ var countPoints = function (rings) {
 
   return count;
 };
+
+// * #1967. Number of Strings That Appear as Substrings in Word
+// Time O(n ^ 2)
+// Space O(1)
+var numOfStrings = function (patterns, word) {
+  let count = 0;
+
+  for (const pattern of patterns) {
+    if (word.indexOf(pattern) !== -1) count++;
+  }
+
+  return count;
+};
+
