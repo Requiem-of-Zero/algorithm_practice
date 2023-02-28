@@ -253,3 +253,36 @@ var uncommonFromSentences = function (s1, s2) {
 
   return output;
 };
+
+// * #2062. Count Vowel Substrings of a String
+// Time O(n)
+// Space O(n)
+const isAllVowel = (vowelSet, str) => {
+  for (let char of vowelSet) {
+    const verify = str.includes(char);
+    if (!verify) return false;
+  }
+
+  return true;
+};
+
+var countVowelSubstrings = function (word) {
+  const vowels = new Set("aeiou".split(""));
+
+  let [left, right, temp, res] = [0, 0, "", 0];
+
+  while (left <= word.length - 5) {
+    const curr = word[right];
+    if (vowels.has(curr)) {
+      temp += curr;
+      if (temp.length >= 5 && isAllVowel(vowels, temp)) res++;
+      right++;
+    } else {
+      left++;
+      temp = "";
+      right = left;
+    }
+  }
+
+  return res;
+};
