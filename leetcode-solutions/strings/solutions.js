@@ -298,3 +298,28 @@ var largestOddNumber = function (num) {
   }
   return "";
 };
+
+// * #2490. Circular Sentence
+// Time O(n)
+// Space O(n)
+const lastChar = (word) => {
+  return word.at(-1);
+};
+
+const firstChar = (word) => {
+  return word[0];
+};
+
+var isCircularSentence = function (sentence) {
+  const splitSent = sentence.split(" ");
+
+  for (let i = 0; i < splitSent.length; i++) {
+    if (
+      lastChar(splitSent[i]) !==
+      firstChar(splitSent[(i + 1) % splitSent.length])
+    )
+      return false;
+  }
+
+  return true;
+};
