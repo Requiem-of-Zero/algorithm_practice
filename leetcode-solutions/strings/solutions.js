@@ -323,3 +323,16 @@ var isCircularSentence = function (sentence) {
 
   return true;
 };
+
+// * #1455. Check If a Word Occurs As a Prefix of Any Word in a Sentence
+// Time O(n)
+// Space O(n)
+var isPrefixOfWord = function (sentence, searchWord) {
+  s = sentence.split(" ");
+  for (let i = 0; i < s.length; i++) {
+    if (s[i].startsWith(searchWord)) {
+      return i + 1;
+    }
+  }
+  return -1;
+};
