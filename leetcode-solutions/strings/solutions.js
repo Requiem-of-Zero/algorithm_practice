@@ -358,3 +358,22 @@ var makeGood = function (s) {
 
   return stack.join("");
 };
+
+// * #1768. Merge Strings Alternately
+// Time O(n)
+// Space O(n)
+var mergeAlternately = function (word1, word2) {
+  let output = "";
+  const [word1Queue, word2Queue] = [word1.split(""), word2.split("")];
+
+  for (let i = 0; i < word1.length; i++) {
+    if (word1Queue.length) output += word1Queue.shift();
+    if (word2Queue.length) output += word2Queue.shift();
+  }
+
+  output += word1Queue.join("") || word2Queue.join("");
+
+  return output;
+};
+
+// 
