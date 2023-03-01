@@ -447,3 +447,19 @@ var percentageLetter = function (s, letter) {
     return Math.floor((count[letter] / s.length) * 100);
   }
 };
+
+// * #2283. Check if Number Has Equal Digit Count and Digit Value
+// Time O(n)
+// Space O(n)
+var digitCount = function (num) {
+  const count = {};
+
+  num.split("").forEach((num) => (count[num] = 1 + (count[num] || 0)));
+
+  for (let i = 0; i < num.length; i++) {
+    if ((count[i] || 0) !== +num[i]) return false;
+  }
+
+  return true;
+};
+
