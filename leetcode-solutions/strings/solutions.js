@@ -376,4 +376,26 @@ var mergeAlternately = function (word1, word2) {
   return output;
 };
 
-// 
+// * #657. Robot Return to Origin
+// Time O(n)
+// Space O(n)
+var judgeCircle = function (moves) {
+  let [left, right, up, down] = [0, 0, 0, 0];
+
+  for (const move of moves) {
+    if (move === "U") {
+      up++;
+    } else if (move === "D") {
+      down++;
+    } else if (move === "L") {
+      left++;
+    } else {
+      right++;
+    }
+  }
+
+  return (
+    new Set([left, right, up, down]).size === 1 ||
+    (left === right && up === down)
+  );
+};
