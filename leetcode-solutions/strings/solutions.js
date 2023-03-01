@@ -463,3 +463,24 @@ var digitCount = function (num) {
   return true;
 };
 
+// * #1935. Maximum Number of Words You Can Type
+// Time O(n * m)
+// Space O(n)
+var canBeTypedWords = function (text, brokenLetters) {
+  const brokenSet = new Set(brokenLetters);
+  let output = 0;
+
+  text
+    .split(" ")
+    .forEach((word) => (output += wordCanBeTyped(word, brokenSet)));
+
+  return output;
+};
+
+const wordCanBeTyped = (word, brokenSet) => {
+  for (const char of word) {
+    if (brokenSet.has(char)) return false;
+  }
+
+  return true;
+};
