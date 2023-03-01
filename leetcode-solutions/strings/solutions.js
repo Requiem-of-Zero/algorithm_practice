@@ -432,3 +432,18 @@ var isSumEqual = function (firstWord, secondWord, targetWord) {
 
   return +firstSum + +secondSum === +targetSum;
 };
+
+// * #2278. Percentage of Letter in String
+// Time O(n)
+// Space O(n)
+var percentageLetter = function (s, letter) {
+  let count = {};
+
+  s.split("").forEach((char) => (count[char] = 1 + (count[char] || 0)));
+
+  if (count[letter] === undefined) {
+    return 0;
+  } else {
+    return Math.floor((count[letter] / s.length) * 100);
+  }
+};
