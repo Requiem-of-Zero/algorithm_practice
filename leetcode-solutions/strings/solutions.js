@@ -574,3 +574,25 @@ var reverseOnlyLetters = function (s) {
 
   return output;
 };
+
+// * #1446. Consecutive Characters
+// Time O(n)
+// Space O(1)
+var maxPower = function (s) {
+  let [left, right, maxStreak, currStreak] = [0, 0, 1, 0];
+
+  while (left < s.length) {
+    if (s[right] === s[left]) {
+      right++;
+      currStreak++;
+    } else {
+      currStreak = 0;
+      left = right;
+    }
+    maxStreak = Math.max(maxStreak, currStreak);
+  }
+
+  return maxStreak;
+};
+
+// 
