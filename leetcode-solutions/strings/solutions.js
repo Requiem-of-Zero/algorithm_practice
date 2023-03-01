@@ -532,3 +532,21 @@ const mutateWithVowel = (word) => {
 const mutateWithConsonant = (word) => {
   return word.slice(1) + word[0] + "ma";
 };
+
+// * #2129. Capitalize the Title
+// Time O(n * m)
+// Space O(n * m)
+var capitalizeTitle = function (title) {
+  const words = title.split(" ");
+
+  for (let i = 0; i < words.length; i++) {
+    let word = words[i];
+    if (word.length <= 2) {
+      words[i] = word.toLowerCase();
+    } else {
+      words[i] = word[0].toUpperCase() + word.slice(1).toLowerCase();
+    }
+  }
+
+  return words.join(" ");
+};
