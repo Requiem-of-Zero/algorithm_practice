@@ -498,3 +498,37 @@ var checkString = function (s) {
 
   return true;
 };
+
+// * #824. Goat Latin
+// Time O(n * m)
+// Space O(n * m)
+var toGoatLatin = function (sentence) {
+  const vowelSet = new Set(["a", "e", "i", "o", "u"]);
+  const words = sentence.split(" ");
+
+  for (let i = 0; i < words.length; i++) {
+    let word = words[i];
+    if (startsWithVowel(word, vowelSet)) {
+      words[i] = mutateWithVowel(word);
+    } else {
+      words[i] = mutateWithConsonant(word);
+    }
+
+    words[i] += "a".repeat(i + 1);
+  }
+
+  return words.join(" ");
+};
+
+const startsWithVowel = (word, vowelSet) => {
+  if (vowelSet.has(word[0].toLowerCase())) return true;
+  return false;
+};
+
+const mutateWithVowel = (word) => {
+  return word + "ma";
+};
+
+const mutateWithConsonant = (word) => {
+  return word.slice(1) + word[0] + "ma";
+};
