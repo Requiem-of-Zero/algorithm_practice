@@ -484,3 +484,17 @@ const wordCanBeTyped = (word, brokenSet) => {
 
   return true;
 };
+
+// * #2124. Check if All A's Appears Before All B's
+// Time O(n)
+// Space O(1)
+var checkString = function (s) {
+  let bFound = false;
+
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === "b") bFound = true;
+    if (s[i] === "a" && bFound === true) return false;
+  }
+
+  return true;
+};
