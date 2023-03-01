@@ -399,3 +399,15 @@ var judgeCircle = function (moves) {
     (left === right && up === down)
   );
 };
+
+// * #2351. First Letter to Appear Twice
+// Time O(n)
+// Space O(n)
+var repeatedCharacter = function (s) {
+  const charSet = new Set();
+
+  for (const char of s) {
+    if (charSet.has(char)) return char;
+    charSet.add(char);
+  }
+};
