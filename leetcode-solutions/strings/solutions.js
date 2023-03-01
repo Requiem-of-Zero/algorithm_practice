@@ -595,4 +595,27 @@ var maxPower = function (s) {
   return maxStreak;
 };
 
-// 
+// * #383. Ransom Note
+// Time O(n)
+// Space O(n)
+var canConstruct = function (ransomNote, magazine) {
+  const [ransomNoteCharCount, magazineCharCount] = [{}, {}];
+
+  ransomNote
+    .split("")
+    .forEach(
+      (char) =>
+        (ransomNoteCharCount[char] = 1 + (ransomNoteCharCount[char] || 0))
+    );
+  magazine
+    .split("")
+    .forEach(
+      (char) => (magazineCharCount[char] = 1 + (magazineCharCount[char] || 0))
+    );
+
+  for (const [key, val] of Object.entries(ransomNoteCharCount)) {
+    if (!magazineCharCount[key] || val > magazineCharCount[key]) return false;
+  }
+
+  return true;
+};
