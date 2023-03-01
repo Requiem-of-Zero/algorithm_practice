@@ -411,3 +411,24 @@ var repeatedCharacter = function (s) {
     charSet.add(char);
   }
 };
+
+// * #1880. Check if Word Equals Summation of Two Words
+// Time O(n)
+// Space O(n)
+var isSumEqual = function (firstWord, secondWord, targetWord) {
+  let [firstSum, secondSum, targetSum] = ["", "", ""];
+
+  for (let i = 0; i < firstWord.length; i++) {
+    firstSum += firstWord.charCodeAt(i) - 97;
+  }
+
+  for (let i = 0; i < secondWord.length; i++) {
+    secondSum += secondWord.charCodeAt(i) - 97;
+  }
+
+  for (let i = 0; i < targetWord.length; i++) {
+    targetSum += targetWord.charCodeAt(i) - 97;
+  }
+
+  return +firstSum + +secondSum === +targetSum;
+};
