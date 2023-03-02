@@ -640,3 +640,21 @@ var rearrangeCharacters = function (s, target) {
 
   return output;
 };
+
+// * #2269. Find the K-Beauty of a Number
+// Time O(n * m)
+// Space O(n)
+var divisorSubstrings = function (num, k) {
+  let left = 0;
+  let right = left + k - 1;
+  let [output, strNum] = [0, String(num)];
+
+  while (left <= strNum.length - k) {
+    let currNum = +strNum.slice(left, right + 1);
+    if (num % currNum === 0) output++;
+    left++;
+    right++;
+  }
+
+  return output;
+};
