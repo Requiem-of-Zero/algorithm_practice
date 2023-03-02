@@ -658,3 +658,32 @@ var divisorSubstrings = function (num, k) {
 
   return output;
 };
+
+// * #2379. Minimum Recolors to Get K Consecutive Black Blocks
+// Time O(n * m)
+// Space O(n)
+const numberOfWhiteInSubstr = (subStr) => {
+  let count = 0;
+  for (const color of subStr) {
+    if (color === "W") count++;
+  }
+  return count;
+};
+
+var minimumRecolors = function (blocks, k) {
+  let left = 0;
+  let right = left + k - 1;
+  let output = Infinity;
+
+  while (left <= blocks.length - k) {
+    let currWhiteOccurance = numberOfWhiteInSubstr(
+      blocks.slice(left, right + 1)
+    );
+    if (currWhiteOccurance === 0) return 0;
+    output = Math.min(output, currWhiteOccurance);
+    left++;
+    right++;
+  }
+
+  return output;
+};
