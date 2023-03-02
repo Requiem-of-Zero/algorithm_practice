@@ -687,3 +687,36 @@ var minimumRecolors = function (blocks, k) {
 
   return output;
 };
+
+// * #520. Detect Capital
+// Time O(n)
+// Space O(n)
+var detectCapitalUse = function (word) {
+  let [check1, check2, check3] = [allCap(word), noCap(word), capitalized(word)];
+  return check1 || check2 || check3;
+};
+
+const allCap = (word) => {
+  let output = true;
+
+  for (const char of word) {
+    if (char.toLowerCase() === char) output = false;
+  }
+
+  return output;
+};
+
+const noCap = (word) => {
+  let output = true;
+
+  for (const char of word) {
+    if (char.toUpperCase() === char) output = false;
+  }
+
+  return output;
+};
+
+const capitalized = (word) => {
+  if (word[0] + word.slice(1).toLowerCase() === word) return true;
+  return false;
+};
