@@ -690,7 +690,7 @@ var minimumRecolors = function (blocks, k) {
 
 // * #520. Detect Capital
 // Time O(n)
-// Space O(n)
+// Space O(1)
 var detectCapitalUse = function (word) {
   let [check1, check2, check3] = [allCap(word), noCap(word), capitalized(word)];
   return check1 || check2 || check3;
