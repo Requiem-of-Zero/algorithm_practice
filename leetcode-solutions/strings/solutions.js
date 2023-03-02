@@ -720,3 +720,33 @@ const capitalized = (word) => {
   if (word[0] + word.slice(1).toLowerCase() === word) return true;
   return false;
 };
+
+// * #1422. Maximum Score After Splitting a String
+// Time O(n)
+// Space O(1)
+var maxScore = function (s) {
+  let numZeroesInLeft = 0;
+  let numOnesInRight = 0;
+
+  if (s[0] === "0") {
+    numZeroesInLeft += 1;
+  }
+  for (let idx = 1; idx < s.length; idx++) {
+    if (s[idx] === "1") {
+      numOnesInRight += 1;
+    }
+  }
+
+  let bestSum = numZeroesInLeft + numOnesInRight;
+
+  for (let idx = 1; idx < s.length - 1; idx++) {
+    if (s[idx] === "1") {
+      numOnesInRight -= 1;
+    } else if (s[idx] === "0") {
+      numZeroesInLeft += 1;
+    }
+    bestSum = Math.max(bestSum, numZeroesInLeft + numOnesInRight);
+  }
+
+  return bestSum;
+};
