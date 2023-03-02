@@ -619,3 +619,24 @@ var canConstruct = function (ransomNote, magazine) {
 
   return true;
 };
+
+// * #2287. Rearrange Characters to Make Target String
+// Time O(n)
+// Space O(n)
+var rearrangeCharacters = function (s, target) {
+  const [sCount, targetCount] = [{}, {}];
+
+  s.split("").forEach((char) => (sCount[char] = 1 + (sCount[char] || 0)));
+  target
+    .split("")
+    .forEach((char) => (targetCount[char] = 1 + (targetCount[char] || 0)));
+
+  let output = Infinity;
+
+  for (const char of Object.keys(targetCount)) {
+    if (!sCount[char]) return 0;
+    output = Math.min(output, Math.floor(sCount[char] / targetCount[char]));
+  }
+
+  return output;
+};
