@@ -58,4 +58,28 @@ function getBinaryCardinality(binary) {
   return count;
 }
 
-// 
+// * Maximum Gross Value
+function getMaximumGrossValue(nums) {
+  let maxGrossValue = 0;
+  for (let idx = 1; idx <= nums.length + 1; idx++) {
+    let term1 = calcSumBetweenRange(nums, 1, idx);
+    for (let jdx = idx; jdx <= nums.length + 1; jdx++) {
+      let term2 = calcSumBetweenRange(nums, idx, jdx);
+      for (let kdx = jdx; kdx <= nums.length + 1; kdx++) {
+        let term3 = calcSumBetweenRange(nums, jdx, kdx);
+        let term4 = calcSumBetweenRange(nums, kdx, nums.length + 1);
+        maxGrossValue = Math.max(maxGrossValue, term1 - term2 + term3 - term4);
+      }
+    }
+  }
+  return maxGrossValue;
+}
+
+function calcSumBetweenRange(nums, startIdx, endIdx) {
+  let sum = 0;
+  for (let idx = startIdx - 1; idx < endIdx - 1; idx++) {
+    sum += nums[idx];
+  }
+  return sum;
+}
+
