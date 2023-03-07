@@ -1,4 +1,5 @@
-// * Workday Hackerrank
+// ! Workday Hackerrank
+// * Get min steps to make array equal
 function getMin(array) {
   let output = 0;
   while (new Set(array).size !== 1) {
@@ -23,3 +24,38 @@ const incrementList = (arr, maxIdx) => {
   return arr;
 };
 
+// * Cardinality Sort
+function cardinalitySort(nums) {
+  nums.sort((a, b) => {
+    const aBinary = a.toString(2);
+    const bBinary = b.toString(2);
+    return getBinaryCardinality(aBinary) - getBinaryCardinality(bBinary);
+  });
+
+  const hash = {};
+
+  for (const num of nums) {
+    let currCardinal = getBinaryCardinality(num.toString(2));
+    if (hash[currCardinal] === undefined) {
+      hash[currCardinal] = [num];
+    } else {
+      hash[currCardinal].push(num);
+    }
+  }
+
+  for (const [key, value] of Object.entries(hash)) {
+    hash[key] = value.sort((a, b) => a - b);
+  }
+
+  return Object.values(hash).flat();
+}
+
+function getBinaryCardinality(binary) {
+  let count = 0;
+  for (let i = 0; i < binary.length; i++) {
+    if (+binary[i] === 1) count++;
+  }
+  return count;
+}
+
+// 
