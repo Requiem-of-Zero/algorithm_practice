@@ -98,3 +98,18 @@ var findEvenNumbers = function (digits) {
   return [...output].sort((a, b) => a - b);
 };
 
+// * #1640. Check Array Formation Through Concatenation
+// Time O(n)
+// Space O(n)
+var canFormArray = function (arr, pieces) {
+  let total = "";
+  arr = arr.join("");
+  for (let i = 0; i < pieces.length; i++) {
+    pieces[i] = pieces[i].join("");
+    total += pieces[i];
+    if (arr.indexOf(pieces[i]) === -1) return false;
+  }
+
+  if (total.length < arr.length) return false;
+  return true;
+};
