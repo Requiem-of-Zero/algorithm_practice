@@ -77,3 +77,24 @@ var romanToInt = function (s) {
   }
   return value;
 };
+
+// * #2094. Finding 3-Digit Even Numbers
+// Time O(n^3)
+// Space O(m)
+var findEvenNumbers = function (digits) {
+  let output = new Set();
+
+  for (let i = 0; i < digits.length; i++) {
+    for (let j = 0; j < digits.length; j++) {
+      for (let k = 0; k < digits.length; k++) {
+        if (digits[i] !== 0 && i !== j && j !== k && k !== i) {
+          let digit = `${digits[i]}${digits[j]}${digits[k]}`;
+          if (+digit % 2 === 0) output.add(+digit);
+        }
+      }
+    }
+  }
+
+  return [...output].sort((a, b) => a - b);
+};
+
