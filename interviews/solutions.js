@@ -83,3 +83,27 @@ function calcSumBetweenRange(nums, startIdx, endIdx) {
   return sum;
 }
 
+// ! Chegg Pairing
+// * Times function
+/*
+Create a function called 'once' that accepts a function as a paramter. It returns a function.
+The returned function will call the passed in function once with supplied arguements and will 
+memoize the return.
+
+All calls to the function afterwards will return the same value.
+*/  
+const timesFunction = (x) => x * 2;
+const new_func = once(timesFunction);
+
+const once = (fn) => {
+  let memo;
+  
+  return (num) => {
+    if(memo === undefined) memo = fn(num)
+    return memo
+  }
+}
+
+console.log("🚀 ~ file: solutions.js:97 ~ new_func:", new_func(12)) // 24
+console.log("🚀 ~ file: solutions.js:97 ~ new_func:", new_func(1)) // 24
+console.log("🚀 ~ file: solutions.js:97 ~ new_func:", new_func(1)) // 24
