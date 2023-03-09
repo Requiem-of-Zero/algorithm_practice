@@ -107,3 +107,30 @@ const once = (fn) => {
 console.log("🚀 ~ file: solutions.js:97 ~ new_func:", new_func(12)) // 24
 console.log("🚀 ~ file: solutions.js:97 ~ new_func:", new_func(1)) // 24
 console.log("🚀 ~ file: solutions.js:97 ~ new_func:", new_func(1)) // 24
+
+// * My Reduce
+/*
+Implement your own reduce method, which takes the array as an additional first argument
+myReduce(arr, reducer, initialValue) You may not call the "Array.prototype.reduce" method
+as part of your implementation
+*/  
+const array1 = [1,2,3,4];
+const initialValue = 0;
+
+const myReduce = (arr, reducer, initialVal) => {
+  let initial = initialVal;
+
+  for(let i=0; i < arr.length; i++){
+    initial = reducer(initial, arr[i])
+  }
+
+  return initial
+}
+
+const sumWithInitial = myReduce(
+  array1,
+  (prev, curr) => prev + curr,
+  initialValue
+)
+
+console.log(sumWithInitial) //10
